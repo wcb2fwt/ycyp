@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" th:href="@{/img/favicon.html}">
+    <link rel="stylesheet" th:href="@{/css/cssLogin/swtx.css}">
+
+      <style>
+          #demo-element {
+              height: 921px;
+          }
+      </style>
+
+    <title>三维图像</title>
+
+  </head>
+
+  <body>
+      <div id="demo-element">
+          <div class="box" id="box">
+              <div class="ok"></div>
+              <div class="tbox">
+                  <div class="tiao"></div>
+              </div>
+          </div>
+      </div>
+
+
+
+    <script type="text/javascript" src="https://unpkg.com/vtk.js@20.4.1/vtk.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/itk@14.1.1/umd/itk.js"></script>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" th:src="@{/js/page/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/page/axios.min.js}"></script>
+    <!-- <script type="text/javascript" th:src="@{/js/page/itk.js}"></script>-->
+    <!-- <script type="text/javascript" th:src="@{/js/page/vtk.js}"></script>-->
+
+    <script type="text/javascript" th:inline="javascript">
+        let i=0;
+        /*add——创建tbx下的div加文字和变宽度的方法*/
+        function add(i){
+            var tbox =$(".tbox");
+            var tiao =$(".tiao");
+            tiao.css("width",i+"%").html(i+"%");
+        }
+        /*创建方法（i++循环起来）*/
+        function xh(){
+            if(i>100){
+                $(".ok").html("正在渲染中，请稍后").fadeIn("slow");
+                return;
+            }
+            if(i<=100){
+                setTimeout("xh()",100)
+                add(i);
+                $(".ok").html("正在加载dicom文件...").fadeIn("slow");
+                i++;
+            }
+        }
+        /*调用xh()函数*/
+        $(document).ready(function(){
+            xh();
+        });
+
+        const testSeriesDirectory = 'http://wcb:8085/dicom/bonzd/header/'
+
+        const data = axios.get('http://wcb:8085/dicom/bonzd/files/'+[[${pkTBLSeriesID}]],{
+            params:{}
+        })
+        .then(function (response) {
+            const fetchFiles = response.data.map(function (file) {
+                    const path = testSeriesDirectory + file + '.dcm';
+                    const axiosget = axios.get(path,{responseType:'blob'}).catch(error => {
+                        console.log('axios get error');
+                        console.log(error)
+                    });
+                    return axiosget.then(function (response) {
+                        const jsFile = new window.File([response.data] ,file)
+                        return jsFile
+                    })
+                        .catch(error => {
+                            console.log('axios get then error');
+                            console.log(error)
+                        })
+                })
+            Promise.all(fetchFiles).then((files)=>{
+
+                itk.readImageDICOMFileSeries(files).then(({ webWorker , image}) => {
+
+                    const imageData = vtk.Common.DataModel.vtkITKHelper.convertItkToVtkImage(image);
+
+
+                    const actor = vtk.Rendering.Core.vtkVolume.newInstance();
+                    const mapper = vtk.Rendering.Core.vtkVolumeMapper.newInstance();
+                    const property = vtk.Rendering.Core.vtkVolumeProperty.newInstance();
+                    const view3d = document.getElementById("demo-element");
+                    const fullScreenRenderer = vtk.Rendering.Misc.vtkFullScreenRenderWindow.newInstance({
+                        rootContainer : view3d,
+                        containerStyle:{
+                            height:'100%',
+                            overflow:'hidden',
+                        },
+                        background:[0,0,0],
+                    });
+                    const renderer = fullScreenRenderer.getRenderer();
+                    const renderWindow = fullScreenRenderer.getRenderWindow();
+                    renderWindow.getInteractor().setDesiredUpdateRate(15);
+
+                    const source = imageData;
+                    let factor = 0;
+                    let m_CurWindow =  5300 ;
+                    let m_CurLevel =  600 ;
+                    let m_CurOpacity =  1.0 ;
+
+
+                    let min_level = m_CurLevel - m_CurWindow / 2;
+
+                    const ctfun = vtk.Rendering.Core.vtkColorTransferFunction.newInstance();
+
+
+                    const ofun = vtk.Common.DataModel.vtkPiecewiseFunction.newInstance();
+
+
+
+                    ctfun.addRGBSegment(min_level, 0, 0, 0, min_level + 0.1301 * m_CurWindow, 0, 0, 0);
+                    ctfun.addRGBSegment(min_level + 0.1301 * m_CurWindow, 0, 0, 0, min_level + 0.4943 * m_CurWindow, 0.6275, 0.0980, 0.0863);
+                    ctfun.addRGBSegment(min_level + 0.4943 * m_CurWindow, 0.6275, 0.0980, 0.0863, min_level + 0.6075 * m_CurWindow, 0.9882, 0.8863, 0.5765);
+                    ctfun.addRGBSegment(min_level + 0.6075 * m_CurWindow, 0.9882, 0.8863, 0.5765, min_level + 0.6849 * m_CurWindow, 1, 1, 1);
+                    ctfun.addRGBSegment(min_level + 0.6849 * m_CurWindow, 1, 1, 1, min_level + m_CurWindow, 1, 1, 1);
+
+                    ofun.addSegment(min_level, 0, min_level + m_CurWindow * 0.4717, 0);
+                    ofun.addSegment(min_level + m_CurWindow * 0.4717, 0, min_level + m_CurWindow * 0.6038, 1 * m_CurOpacity);
+                    ofun.addSegment(min_level + m_CurWindow * 0.6038, 1 * m_CurOpacity, min_level + m_CurWindow, 1 * m_CurOpacity);
+
+                    mapper.setBlendModeToComposite();
+                    property.setShade(false);
+                    property.setAmbient(0.1);
+                    property.setDiffuse(0.8);
+                    property.setSpecular(0);
+                    // set them on the property
+                    property.setRGBTransferFunction(0, ctfun);
+                    property.setScalarOpacity(0, ofun);
+                    property.setScalarOpacityUnitDistance(0, 4.5);
+                    property.setInterpolationTypeToLinear();
+                    actor.setProperty(property);
+
+                    actor.setMapper(mapper);
+                    mapper.setInputData(source);
+
+                    const sampleDistance =
+                        0.7 *
+                        Math.sqrt(
+                            source.getSpacing().map((v)=>v*v).reduce((a,b)=>a+b,0),
+                        );
+                    mapper.setSampleDistance(sampleDistance);
+
+                    renderer.addActor(actor);
+
+                    // const lookupTable = vtk.Rendering.Core.vtkColorTransferFunction.newInstance();
+                    // const piecewiseFunction = vtkPiecewiseFunction.newInstance();
+
+                    // create color and opacity transfer functions
+                    // 加了UI之后 这里的设置其实可以删除
+                    // lookupTable.addRGBPoint(200.0, 0.4, 0.2, 0.0);
+                    // lookupTable.addRGBPoint(2000.0, 1.0, 1.0, 1.0);
+
+                    // piecewiseFunction.addPoint(200.0, 0.0);
+                    // piecewiseFunction.addPoint(1200.0, 0.5);
+                    // piecewiseFunction.addPoint(3000.0, 0.8);
+
+                    // const property = actor.getProperty();
+                    // console.log(property);
+                    // vtk.Rendering.Core.vtkVolumeProperty.setR
+
+
+                    // Control UI
+                    // const controllerWidget = vtk.Interaction.UI.vtkVolumeController.newInstance({
+                    //     size: [400, 150],
+                    //     rescaleColorMap: true,
+                    // });
+                    // controllerWidget.setContainer(view3d);
+                    // controllerWidget.setupContent(renderWindow, actor, true);
+                    //
+                    // fullScreenRenderer.setResizeCallback(({ width, height }) => {
+                    //     // 2px padding + 2x1pxboder  + 5px edge = 14
+                    //     if (width > 414) {
+                    //         controllerWidget.setSize(400, 150);
+                    //     } else {
+                    //         controllerWidget.setSize(width - 14, 150);
+                    //     }
+                    //     controllerWidget.render();
+                    //     //fpsMonitor.update();
+                    // });
+                    // First render
+                    renderer.resetCamera();
+                    renderWindow.render();
+                    document.getElementById('box').style.display = 'none';
+                    // document.getElementsByClassName("VolumeController-module-container_qCp35").css('top','11%');
+                })
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+            $(".ok").html("渲染出错，内存不足").fadeIn("slow");
+        })
+
+    </script>
+
+
+
+
+
+
+  </body>
+</html>

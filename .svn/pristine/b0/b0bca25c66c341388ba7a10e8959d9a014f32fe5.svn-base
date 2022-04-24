@@ -1,0 +1,61 @@
+server.servlet.context-path=/dicom
+#spring.mvc.static-path-pattern=/static/**
+#community
+community.path.domain=http://localhost:8085
+#上传资源存放的位置
+community.path.upload=/usr/local/dicom/img
+#community.path.upload=D:/pic
+
+
+### 数据库连接
+#spring.datasource.jdbc-url=jdbc:mysql://47.98.55.20:3306/dbdicom?characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong&allowPublicKeyRetrieval=true
+spring.datasource.jdbc-url=jdbc:mysql://127.0.0.1:3307/dbdicom?characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong&allowPublicKeyRetrieval=true
+#spring.datasource.jdbc-url=jdbc:mysql://47.102.119.189:3306/dbdicom?characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong&allowPublicKeyRetrieval=true
+spring.datasource.username=root
+#spring.datasource.password=Bon_12345678
+spring.datasource.password=root
+#spring.datasource.password=123456
+spring.datasource.tomcat.validation-query=SELECT 1
+spring.datasource.dbcp2.initial-size=10
+spring.datasource.dbcp2.min-idle=20
+spring.datasource.dbcp2.max-wait-millis=3000
+
+
+# Specify the DBMS
+spring.jpa.database=MYSQL
+# Show or not log for each sql query
+spring.jpa.show-sql=true
+# Hibernate settings are prefixed with spring.jpa.hibernate.*
+spring.jpa.hibernate.globally_quoted_identifiers=true
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+spring.jpa.hibernate.naming_strategy=org.hibernate.cfg.DefaultNamingStrategy
+spring.jpa.hibernate.show_sql=true
+spring.jpa.hibernate.format_sql=true
+spring.jpa.hibernate.generate_statistics=false
+spring.jpa.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
+
+# 自动更新表
+spring.jpa.properties.hibernate.hbm2ddl.auto=update
+# 使用MYSQL5作为数据库访问方言
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+#显示sql语句
+spring.jpa.properties.hibernate.show_sql=true
+
+##tomcat##
+server.tomcat.uri-encoding=UTF-8
+
+# App
+app.name=Easy PACS Server
+app.description=${app.name} is a Dicom Server Application
+
+# 配置常量
+#pacs.storage.image=/usr/local/dicom/img
+pacs.storage.image=D:/img
+#pacs.storage.dcm=/usr/local/dicom/dcm
+pacs.storage.dcm=D:/pic
+pacs.aetitle=*
+pacs.ports=10455
+# Server
+server.port=8085
+endpoints.shutdown.enabled=false

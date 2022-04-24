@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="OHIF Viewer">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="@ohif/viewer">
+    <meta name="msapplication-TileColor" content="#fff">
+    <meta name="msapplication-TileImage" content="/assets/mstile-144x144.png">
+    <meta name="msapplication-config" content="/assets/browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="1024x1024" href="/assets/apple-touch-icon-1024x1024.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" href="/assets/apple-touch-startup-image-320x460.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-640x920.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-640x1096.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-750x1294.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3)" href="/assets/apple-touch-startup-image-1182x2208.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3)" href="/assets/apple-touch-startup-image-1242x2148.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" href="/assets/apple-touch-startup-image-748x1024.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" href="/assets/apple-touch-startup-image-768x1004.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-1496x2048.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="/assets/apple-touch-startup-image-1536x2008.png">
+    <link rel="icon" type="image/png" sizes="228x228" href="/assets/coast-228x228.png">
+    <link rel="yandex-tableau-widget" href="/assets/yandex-browser-manifest.json">
+
+    <!-- Built with: https://polyfill.io/v3/url-builder/ -->
+    <!-- Targets IE11 -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&amp;features=default%2CObject.values%2CArray.prototype.flat%2CObject.entries%2CSymbol%2CArray.prototype.includes%2CString.prototype.repeat%2CArray.prototype.find"></script>
+    <script type="text/javascript">
+        window.PUBLIC_URL = '/';
+    </script>
+    <script type="text/javascript" src="/app-config.js"></script>
+    <script type="module" src="/init-service-worker.js"></script>
+
+    <title>OHIF Viewer</title>
+
+    <!-- WEB FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&amp;display=swap" rel="stylesheet">
+
+    <!-- EXTENSIONS -->
+    <!-- <script type="text/javascript" src="path/to/some-extension.js"></script>
+
+    <script>
+      window.config.extensions = [SomeExtension];
+    </script> -->
+    <link href="/app.b088d0b8eecdc70784db.css" rel="stylesheet"><style type="text/css">:root {
+    --viewport-tag-padding: 20px;
+}
+
+.ViewportOverlay {
+    color: #9ccef9;
+}
+
+.ViewportOverlay .overlay-element {
+    position: absolute;
+    font-weight: 400;
+    text-shadow: 1px 1px black;
+    pointer-events: none;
+}
+
+.ViewportOverlay .top-left {
+    top: var(--viewport-tag-padding);
+    left: var(--viewport-tag-padding);
+}
+
+.ViewportOverlay .top-center {
+    top: var(--viewport-tag-padding);
+    padding-top: var(--viewport-tag-padding);
+    width: 100%;
+    text-align: center;
+}
+
+.ViewportOverlay .top-right {
+    top: var(--viewport-tag-padding);
+    right: var(--viewport-tag-padding);
+    text-align: right;
+}
+
+.ViewportOverlay .bottom-left {
+    bottom: var(--viewport-tag-padding);
+    left: var(--viewport-tag-padding);
+}
+
+.ViewportOverlay .bottom-right {
+    bottom: var(--viewport-tag-padding);
+    right: var(--viewport-tag-padding);
+    text-align: right;
+}
+
+.ViewportOverlay svg {
+    color: #9ccef9;
+    fill: #9ccef9;
+    stroke: #9ccef9;
+    background-color: transparent;
+    margin: 2px;
+    width: 18px;
+    height: 18px;
+}
+</style><script charset="utf-8" src="/vendors~OHIFCornerstoneViewport~OHIFDicomHtmlViewport~OHIFVTKViewport~StudyListRouting~ViewerLocalFileData.bundle.6f29176aa165c9528191.js"></script><link rel="stylesheet" type="text/css" href="/9.b088d0b8eecdc70784db.css"><script charset="utf-8" src="/StudyListRouting.bundle.3cc1743679a21fc638dd.js"></script></head>
+
+<body>
+<noscript> You need to enable JavaScript to run this app. </noscript>
+
+<div id="root"><div></div><div style="opacity: 1; pointer-events: none; transition: opacity 200ms linear 0s;"><div style="background: rgb(34, 153, 221); height: 2px; left: 0px; margin-left: -100%; position: fixed; top: 0px; transition: margin-left 200ms linear 0s; width: 100%; z-index: 1031;"><div style="box-shadow: rgb(34, 153, 221) 0px 0px 10px, rgb(34, 153, 221) 0px 0px 5px; display: block; height: 100%; opacity: 1; position: absolute; right: 0px; transform: rotate(3deg) translate(0px, -4px); width: 100px;"></div></div></div><div class="notification-bar">研究用途</div><div class="entry-header header-big"><div class="header-left-box"><a target="_blank" rel="noopener noreferrer" class="header-brand" href="http://ohif.org"><svg name="ohif-logo" class="header-logo-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47 47" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2.5"><title>OHIF Logo</title><rect x="1.25" y="1.25" width="18.8" height="18.8" rx="1" ry="1"></rect><rect x="26" y="1.25" width="18.8" height="18.8" rx="1" ry="1"></rect><rect x="1.25" y="26" width="18.8" height="18.8" rx="1" ry="1"></rect><rect x="26" y="26" width="18.8" height="18.8" rx="1" ry="1"></rect></svg><svg name="ohif-text-logo" class="header-logo-text" viewBox="0 0 224 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.416 5.932c0 1.53-.462 2.777-1.386 3.738-.915.952-2.072 1.428-3.472 1.428-1.39 0-2.553-.48-3.486-1.442-.933-.97-1.4-2.217-1.4-3.738 0-1.53.48-2.753 1.442-3.668.961-.924 2.11-1.386 3.444-1.386 1.335 0 2.478.462 3.43 1.386.952.915 1.428 2.142 1.428 3.682zM3.052 8.9c.719.71 1.554 1.064 2.506 1.064.952 0 1.783-.355 2.492-1.064.71-.719 1.064-1.699 1.064-2.94 0-1.25-.364-2.226-1.092-2.926-.719-.71-1.54-1.064-2.464-1.064-.924 0-1.75.355-2.478 1.064-.728.7-1.092 1.675-1.092 2.926 0 1.241.355 2.221 1.064 2.94zm11.578 5.25h-2.814c-.122 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h.784V5.05h-.756c-.122 0-.182-.056-.182-.168V4.28c0-.112.06-.168.182-.168h1.638c.12 0 .182.056.182.168l-.014 1.106h.014a2.34 2.34 0 0 1 .854-.966c.4-.27.89-.406 1.47-.406.942 0 1.703.322 2.282.966.578.635.868 1.484.868 2.548 0 1.055-.285 1.913-.854 2.576-.57.663-1.33.994-2.282.994-.58 0-1.064-.13-1.456-.392a2.359 2.359 0 0 1-.826-.98h-.042c.028.299.042.513.042.644v2.842h.91c.12 0 .182.056.182.168v.602c0 .112-.061.168-.182.168zm-.938-6.566c0 .812.21 1.437.63 1.876.429.439.942.658 1.54.658.606 0 1.11-.233 1.512-.7.41-.476.616-1.097.616-1.862 0-.775-.206-1.395-.616-1.862a1.911 1.911 0 0 0-1.512-.7c-.607 0-1.12.229-1.54.686-.42.457-.63 1.092-.63 1.904zm12.69.112h-5.04c.037.775.28 1.372.727 1.792.457.42.97.63 1.54.63.57 0 1.055-.121 1.456-.364.41-.243.686-.48.826-.714.075-.093.159-.107.252-.042l.378.378c.056.056.084.107.084.154 0 .037-.023.089-.07.154a2.014 2.014 0 0 1-.252.308c-.13.14-.317.299-.56.476-.233.177-.541.327-.924.448a3.874 3.874 0 0 1-1.204.182c-.98 0-1.801-.322-2.464-.966-.653-.644-.98-1.507-.98-2.59 0-1.092.327-1.95.98-2.576.654-.635 1.451-.952 2.394-.952.952 0 1.699.308 2.24.924.541.607.812 1.428.812 2.464v.112c0 .121-.065.182-.196.182zm-.967-.854c-.028-.579-.21-1.04-.546-1.386-.336-.345-.784-.518-1.344-.518s-1.04.159-1.442.476c-.401.317-.64.793-.714 1.428h4.046zM35.132 11h-1.33c-.401 0-.602-.196-.602-.588V6.73c0-.541-.13-.961-.392-1.26-.261-.299-.644-.448-1.148-.448-.718 0-1.278.294-1.68.882a1.765 1.765 0 0 0-.182.308v3.85h.742c.122 0 .182.056.182.168v.602c0 .112-.06.168-.182.168h-2.674c-.121 0-.182-.056-.182-.168v-.602c0-.112.061-.168.182-.168h.77V5.05h-.77c-.121 0-.182-.056-.182-.168V4.28c0-.112.061-.168.182-.168h1.638c.122 0 .182.056.182.168l-.028.952h.042c.486-.812 1.237-1.218 2.254-1.218.747 0 1.33.22 1.75.658.42.439.635 1.031.644 1.778v3.612h.784c.122 0 .182.056.182.168v.602c0 .112-.06.168-.182.168zm15.744 0h-3.374c-.112 0-.168-.056-.168-.168v-.714c0-.112.056-.168.168-.168h1.078V6.52h-5.208v3.43h1.078c.122 0 .182.056.182.168v.714c0 .112-.06.168-.182.168h-3.36c-.121 0-.182-.056-.182-.168v-.714c0-.112.061-.168.182-.168h1.064V1.998H41.09c-.121 0-.182-.056-.182-.168v-.714c0-.112.061-.168.182-.168h3.36c.122 0 .182.056.182.168v.714c0 .112-.06.168-.182.168h-1.078v3.5h5.208v-3.5h-1.078c-.112 0-.168-.056-.168-.168v-.714c0-.112.056-.168.168-.168h3.374c.112 0 .168.056.168.168v.714c0 .112-.056.168-.168.168h-1.078V9.95h1.078c.112 0 .168.056.168.168v.714c0 .112-.056.168-.168.168zm7.17-3.304h-5.04c.036.775.28 1.372.727 1.792.458.42.97.63 1.54.63.57 0 1.055-.121 1.456-.364.41-.243.686-.48.826-.714.075-.093.159-.107.252-.042l.378.378c.056.056.084.107.084.154 0 .037-.023.089-.07.154a2.014 2.014 0 0 1-.252.308c-.13.14-.317.299-.56.476-.233.177-.541.327-.924.448a3.874 3.874 0 0 1-1.204.182c-.98 0-1.801-.322-2.464-.966-.653-.644-.98-1.507-.98-2.59 0-1.092.327-1.95.98-2.576.654-.635 1.451-.952 2.394-.952.952 0 1.699.308 2.24.924.541.607.812 1.428.812 2.464v.112c0 .121-.065.182-.196.182zm-.967-.854c-.028-.579-.21-1.04-.546-1.386-.336-.345-.784-.518-1.344-.518s-1.04.159-1.442.476c-.401.317-.64.793-.714 1.428h4.046zM66.21 11H64.99c-.402 0-.602-.196-.602-.588v-.714h-.028c-.682.943-1.592 1.414-2.73 1.414-.672 0-1.223-.173-1.652-.518-.43-.355-.644-.83-.644-1.428 0-.765.331-1.325.994-1.68.672-.364 1.591-.546 2.758-.546h1.176v-.168c0-1.167-.607-1.75-1.82-1.75-.57 0-.98.056-1.232.168a4.718 4.718 0 0 0-.546.252c-.103.065-.182.117-.238.154-.14.112-.243.121-.308.028l-.392-.49c-.066-.075-.056-.15.028-.224.158-.205.485-.406.98-.602.494-.196 1.078-.294 1.75-.294 1.96 0 2.94.933 2.94 2.8v3.248h.784c.112 0 .168.056.168.168v.602c0 .112-.056.168-.168.168zm-1.946-3.22h-1.106c-.542 0-.99.028-1.344.084a2.036 2.036 0 0 0-.91.364c-.243.187-.364.443-.364.77s.13.597.392.812c.27.205.62.308 1.05.308.905 0 1.666-.401 2.282-1.204V7.78zM70.23 11h-2.674c-.121 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h.77V1.886h-.77c-.121 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h1.554c.252 0 .378.117.378.35v8.764h.742c.121 0 .182.056.182.168v.602c0 .112-.06.168-.182.168zm5.853-.714c.037.037.056.08.056.126 0 .037-.028.084-.084.14-.41.364-.929.546-1.554.546-.616 0-1.125-.2-1.526-.602-.392-.41-.588-1.003-.588-1.778V5.05h-.784c-.13 0-.196-.06-.196-.182v-.574c0-.121.065-.182.196-.182h.784V2.698c0-.13.065-.196.196-.196h.784c.121 0 .182.065.182.196v1.414h1.778c.13 0 .196.06.196.182v.574c0 .121-.065.182-.196.182h-1.778v3.64c0 .467.103.821.308 1.064.215.233.495.35.84.35.355 0 .62-.089.798-.266.093-.084.177-.08.252.014l.336.434zm8.268.714h-1.33c-.401 0-.602-.196-.602-.588V6.73c0-.541-.13-.961-.392-1.26-.261-.299-.644-.448-1.148-.448-.383 0-.677.06-.882.182a2.598 2.598 0 0 0-.448.308 1.6 1.6 0 0 0-.252.252c-.112.15-.205.303-.28.462v3.836h.742c.121 0 .182.056.182.168v.602c0 .112-.06.168-.182.168h-2.674c-.121 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h.77V1.886h-.77c-.121 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h1.764c.112 0 .168.056.168.168v3.122c0 .308-.019.593-.056.854h.028c.457-.719 1.185-1.078 2.184-1.078.747 0 1.33.22 1.75.658.42.439.635 1.031.644 1.778v3.612h.784c.121 0 .182.056.182.168v.602c0 .112-.06.168-.182.168zm9.318 0h-3.36c-.121 0-.182-.056-.182-.168v-.714c0-.112.06-.168.182-.168h1.064V1.998H90.31c-.121 0-.182-.056-.182-.168v-.714c0-.112.06-.168.182-.168h3.36c.121 0 .182.056.182.168v.714c0 .112-.06.168-.182.168h-1.078V9.95h1.078c.121 0 .182.056.182.168v.714c0 .112-.06.168-.182.168zm13.124 0h-1.33c-.215 0-.374-.042-.476-.126-.094-.093-.14-.247-.14-.462V6.73c0-.541-.131-.961-.392-1.26-.252-.299-.63-.448-1.134-.448-.738 0-1.316.322-1.736.966.056.168.084.355.084.56v3.514h.784c.112 0 .168.056.168.168v.602c0 .112-.056.168-.168.168h-2.674c-.122 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h.742V6.73c0-.541-.131-.961-.392-1.26-.262-.299-.644-.448-1.148-.448-.383 0-.677.06-.882.182a2.594 2.594 0 0 0-.448.308 1.6 1.6 0 0 0-.252.252c-.112.15-.206.303-.28.462v3.836h.686c.112 0 .168.056.168.168v.602c0 .112-.056.168-.168.168h-2.618c-.122 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h.77V5.05h-.77c-.122 0-.182-.056-.182-.168V4.28c0-.112.06-.168.182-.168h1.372c.158 0 .27.033.336.098.074.056.112.163.112.322l-.028.7h.042c.485-.812 1.236-1.218 2.254-1.218 1.026 0 1.726.387 2.1 1.162.532-.775 1.283-1.162 2.254-1.162.746 0 1.325.22 1.736.658.42.439.63 1.031.63 1.778l.014 3.612h.784c.121 0 .182.056.182.168v.602c0 .112-.061.168-.182.168zm7.978 0h-1.218c-.401 0-.602-.196-.602-.588v-.714h-.028c-.681.943-1.591 1.414-2.73 1.414-.672 0-1.222-.173-1.652-.518-.429-.355-.644-.83-.644-1.428 0-.765.332-1.325.994-1.68.672-.364 1.592-.546 2.758-.546h1.176v-.168c0-1.167-.606-1.75-1.82-1.75-.569 0-.98.056-1.232.168a4.718 4.718 0 0 0-.546.252l-.238.154c-.14.112-.242.121-.308.028l-.392-.49c-.065-.075-.056-.15.028-.224.159-.205.486-.406.98-.602.495-.196 1.078-.294 1.75-.294 1.96 0 2.94.933 2.94 2.8v3.248h.784c.112 0 .168.056.168.168v.602c0 .112-.056.168-.168.168zm-1.946-3.22h-1.106c-.541 0-.989.028-1.344.084a2.039 2.039 0 0 0-.91.364c-.242.187-.364.443-.364.77s.131.597.392.812c.271.205.621.308 1.05.308.906 0 1.666-.401 2.282-1.204V7.78zm6.236 6.496c-.467 0-.822-.033-1.064-.098a7.108 7.108 0 0 1-.574-.182 2.224 2.224 0 0 1-.364-.154 2.853 2.853 0 0 1-.294-.154c-.411-.27-.565-.467-.462-.588l.364-.518c.056-.084.135-.089.238-.014.009 0 .037.019.084.056.056.047.107.089.154.126.056.037.126.08.21.126.093.056.196.103.308.14.112.047.233.089.364.126.308.084.648.126 1.022.126.672 0 1.208-.163 1.61-.49.41-.317.616-.821.616-1.512V9.67c-.168.392-.448.728-.84 1.008-.383.28-.864.42-1.442.42-.952 0-1.718-.331-2.296-.994-.57-.663-.854-1.521-.854-2.576 0-1.055.289-1.904.868-2.548.588-.644 1.348-.966 2.282-.966.578 0 1.064.135 1.456.406.401.261.69.583.868.966h.028l-.014-1.106c0-.112.056-.168.168-.168h1.652c.112 0 .168.056.168.168v.602c0 .112-.056.168-.168.168h-.756v6.216c0 .999-.308 1.75-.924 2.254-.607.504-1.41.756-2.408.756zm-2.072-6.72c0 .765.205 1.386.616 1.862.41.467.924.7 1.54.7s1.124-.233 1.526-.7c.41-.467.616-1.092.616-1.876 0-.784-.206-1.405-.616-1.862a1.943 1.943 0 0 0-1.526-.686c-.616 0-1.13.233-1.54.7-.411.467-.616 1.087-.616 1.862zM127.255 11h-2.674c-.121 0-.182-.056-.182-.168v-.602c0-.112.061-.168.182-.168h.77V5.05h-.77c-.121 0-.182-.056-.182-.168V4.28c0-.112.061-.168.182-.168h1.764c.112 0 .168.056.168.168v5.782h.742c.122 0 .182.056.182.168v.602c0 .112-.06.168-.182.168zm-.798-8.96a.765.765 0 0 1 .238.56.72.72 0 0 1-.238.546.742.742 0 0 1-.546.224.792.792 0 0 1-.56-.224.744.744 0 0 1-.224-.546.792.792 0 0 1 .784-.798.72.72 0 0 1 .546.238zm9.492 8.96h-1.33c-.402 0-.602-.196-.602-.588V6.73c0-.541-.131-.961-.392-1.26-.262-.299-.644-.448-1.148-.448-.719 0-1.279.294-1.68.882a1.697 1.697 0 0 0-.182.308v3.85h.742c.121 0 .182.056.182.168v.602c0 .112-.061.168-.182.168h-2.674c-.122 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h.77V5.05h-.77c-.122 0-.182-.056-.182-.168V4.28c0-.112.06-.168.182-.168h1.638c.121 0 .182.056.182.168l-.028.952h.042c.485-.812 1.236-1.218 2.254-1.218.746 0 1.33.22 1.75.658.42.439.634 1.031.644 1.778v3.612h.784c.121 0 .182.056.182.168v.602c0 .112-.061.168-.182.168zm4.207 3.276c-.466 0-.821-.033-1.064-.098a7.377 7.377 0 0 1-.574-.182 2.263 2.263 0 0 1-.364-.154 3.075 3.075 0 0 1-.294-.154c-.41-.27-.564-.467-.462-.588l.364-.518c.056-.084.136-.089.238-.014.01 0 .038.019.084.056l.154.126c.056.037.126.08.21.126.094.056.196.103.308.14.112.047.234.089.364.126.308.084.649.126 1.022.126.672 0 1.209-.163 1.61-.49.411-.317.616-.821.616-1.512V9.67c-.168.392-.448.728-.84 1.008-.382.28-.863.42-1.442.42-.952 0-1.717-.331-2.296-.994-.569-.663-.854-1.521-.854-2.576 0-1.055.29-1.904.868-2.548.588-.644 1.349-.966 2.282-.966.579 0 1.064.135 1.456.406.402.261.691.583.868.966h.028l-.014-1.106c0-.112.056-.168.168-.168h1.652c.112 0 .168.056.168.168v.602c0 .112-.056.168-.168.168h-.756v6.216c0 .999-.308 1.75-.924 2.254-.606.504-1.409.756-2.408.756zm-2.072-6.72c0 .765.206 1.386.616 1.862.411.467.924.7 1.54.7s1.125-.233 1.526-.7c.411-.467.616-1.092.616-1.876 0-.784-.205-1.405-.616-1.862a1.941 1.941 0 0 0-1.526-.686c-.616 0-1.129.233-1.54.7-.41.467-.616 1.087-.616 1.862zM154.07 11h-3.864c-.122 0-.182-.056-.182-.168v-.714c0-.112.06-.168.182-.168h1.064V1.998h-1.064c-.122 0-.182-.056-.182-.168v-.714c0-.112.06-.168.182-.168h7.182c.121 0 .182.056.182.168V3.37c0 .121-.061.182-.182.182h-.756c-.112 0-.168-.06-.168-.182V1.998h-3.976V5.47h3.29c.121 0 .182.056.182.168v.714c0 .112-.061.168-.182.168h-3.29v3.43h1.582c.112 0 .168.056.168.168v.714c0 .112-.056.168-.168.168zm9.612-.882c-.653.653-1.488.98-2.506.98-1.017 0-1.852-.322-2.506-.966-.653-.653-.98-1.517-.98-2.59 0-1.083.332-1.941.994-2.576.663-.635 1.494-.952 2.492-.952 1.008 0 1.839.322 2.492.966.663.635.994 1.489.994 2.562 0 1.064-.326 1.923-.98 2.576zm-4.816-2.576c0 .765.224 1.386.672 1.862.448.476.994.714 1.638.714.654 0 1.204-.238 1.652-.714.448-.476.672-1.097.672-1.862 0-.765-.228-1.381-.686-1.848a2.168 2.168 0 0 0-1.624-.7c-.634 0-1.18.233-1.638.7-.457.467-.686 1.083-.686 1.848zM172.763 11h-1.218c-.401 0-.602-.196-.602-.588v-.518h-.042c-.383.803-1.111 1.204-2.184 1.204-.747 0-1.339-.22-1.778-.658-.429-.448-.649-1.04-.658-1.778V5.05h-.798c-.112 0-.168-.056-.168-.168V4.28c0-.112.056-.168.168-.168h1.344c.401 0 .602.196.602.588v3.682c0 .541.131.961.392 1.26.261.299.644.448 1.148.448.681 0 1.218-.252 1.61-.756.168-.215.252-.36.252-.434V5.05h-.756c-.112 0-.168-.056-.168-.168V4.28c0-.112.056-.168.168-.168h1.736c.112 0 .168.056.168.168v5.782h.784c.121 0 .182.056.182.168v.602c0 .112-.061.168-.182.168zm8.658 0h-1.33c-.401 0-.602-.196-.602-.588V6.73c0-.541-.13-.961-.392-1.26-.261-.299-.644-.448-1.148-.448-.718 0-1.278.294-1.68.882a1.824 1.824 0 0 0-.182.308v3.85h.742c.122 0 .182.056.182.168v.602c0 .112-.06.168-.182.168h-2.674c-.121 0-.182-.056-.182-.168v-.602c0-.112.061-.168.182-.168h.77V5.05h-.77c-.121 0-.182-.056-.182-.168V4.28c0-.112.061-.168.182-.168h1.638c.122 0 .182.056.182.168l-.028.952h.042c.486-.812 1.237-1.218 2.254-1.218.747 0 1.33.22 1.75.658.42.439.635 1.031.644 1.778v3.612h.784c.122 0 .182.056.182.168v.602c0 .112-.06.168-.182.168zm8.215 0h-1.218c-.215 0-.374-.042-.476-.126-.094-.093-.14-.247-.14-.462v-.784h-.014c-.15.392-.43.737-.84 1.036-.411.29-.91.434-1.498.434-.934 0-1.694-.327-2.282-.98-.579-.653-.868-1.507-.868-2.562 0-1.064.289-1.918.868-2.562.588-.653 1.353-.98 2.296-.98.578 0 1.059.135 1.442.406.382.261.658.583.826.966h.014a8.784 8.784 0 0 1-.014-.462V1.886h-.784c-.122 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h1.736c.112 0 .168.056.168.168v8.946h.784c.112 0 .168.056.168.168v.602c0 .112-.056.168-.168.168zm-6.188-3.472c0 .775.2 1.4.602 1.876.41.476.928.714 1.554.714.625 0 1.138-.233 1.54-.7.401-.476.602-1.106.602-1.89 0-.784-.206-1.4-.616-1.848a1.97 1.97 0 0 0-1.526-.686c-.607 0-1.12.229-1.54.686-.411.457-.616 1.073-.616 1.848zM197.746 11h-1.218c-.401 0-.602-.196-.602-.588v-.714h-.028c-.681.943-1.591 1.414-2.73 1.414-.672 0-1.223-.173-1.652-.518-.429-.355-.644-.83-.644-1.428 0-.765.331-1.325.994-1.68.672-.364 1.591-.546 2.758-.546h1.176v-.168c0-1.167-.607-1.75-1.82-1.75-.569 0-.98.056-1.232.168a4.718 4.718 0 0 0-.546.252c-.103.065-.182.117-.238.154-.14.112-.243.121-.308.028l-.392-.49c-.065-.075-.056-.15.028-.224.159-.205.485-.406.98-.602.495-.196 1.078-.294 1.75-.294 1.96 0 2.94.933 2.94 2.8v3.248h.784c.112 0 .168.056.168.168v.602c0 .112-.056.168-.168.168zM195.8 7.78h-1.106c-.541 0-.989.028-1.344.084a2.034 2.034 0 0 0-.91.364c-.243.187-.364.443-.364.77s.131.597.392.812c.271.205.621.308 1.05.308.905 0 1.666-.401 2.282-1.204V7.78zm7.459 2.506c.037.037.056.08.056.126 0 .037-.028.084-.084.14-.411.364-.929.546-1.554.546-.616 0-1.125-.2-1.526-.602-.392-.41-.588-1.003-.588-1.778V5.05h-.784c-.131 0-.196-.06-.196-.182v-.574c0-.121.065-.182.196-.182h.784V2.698c0-.13.065-.196.196-.196h.784c.121 0 .182.065.182.196v1.414h1.778c.13 0 .196.06.196.182v.574c0 .121-.066.182-.196.182h-1.778v3.64c0 .467.102.821.308 1.064.214.233.494.35.84.35.354 0 .62-.089.798-.266.093-.084.177-.08.252.014l.336.434zm3.69.714h-2.674c-.122 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h.77V5.05h-.77c-.122 0-.182-.056-.182-.168V4.28c0-.112.06-.168.182-.168h1.764c.112 0 .168.056.168.168v5.782h.742c.121 0 .182.056.182.168v.602c0 .112-.061.168-.182.168zm-.798-8.96a.769.769 0 0 1 .238.56c0 .215-.08.397-.238.546a.745.745 0 0 1-.546.224.789.789 0 0 1-.56-.224.74.74 0 0 1-.224-.546.788.788 0 0 1 .784-.798c.214 0 .396.08.546.238zm7.871 8.078c-.653.653-1.489.98-2.506.98-1.017 0-1.853-.322-2.506-.966-.653-.653-.98-1.517-.98-2.59 0-1.083.331-1.941.994-2.576s1.493-.952 2.492-.952c1.008 0 1.839.322 2.492.966.663.635.994 1.489.994 2.562 0 1.064-.327 1.923-.98 2.576zm-4.816-2.576c0 .765.224 1.386.672 1.862.448.476.994.714 1.638.714a2.18 2.18 0 0 0 1.652-.714c.448-.476.672-1.097.672-1.862 0-.765-.229-1.381-.686-1.848a2.168 2.168 0 0 0-1.624-.7c-.635 0-1.181.233-1.638.7-.457.467-.686 1.083-.686 1.848zM223.49 11h-1.33c-.402 0-.602-.196-.602-.588V6.73c0-.541-.131-.961-.392-1.26-.262-.299-.644-.448-1.148-.448-.719 0-1.279.294-1.68.882a1.697 1.697 0 0 0-.182.308v3.85h.742c.121 0 .182.056.182.168v.602c0 .112-.061.168-.182.168h-2.674c-.122 0-.182-.056-.182-.168v-.602c0-.112.06-.168.182-.168h.77V5.05h-.77c-.122 0-.182-.056-.182-.168V4.28c0-.112.06-.168.182-.168h1.638c.121 0 .182.056.182.168l-.028.952h.042c.485-.812 1.236-1.218 2.254-1.218.746 0 1.33.22 1.75.658.42.439.634 1.031.644 1.778v3.612h.784c.121 0 .182.056.182.168v.602c0 .112-.061.168-.182.168z" fill="#fff"></path></svg></a></div><div class="header-menu"><span class="research-use">研究用途</span><div class="dd-menu" data-cy="options-menu"><div class="dd-menu-toggle"><span class="dd-title">选项</span><span class="dd-caret-down"></span></div></div></div></div><div class="study-list-header"><div class="header"><h1 style="font-weight: 300; font-size: 22px;">StudyList</h1></div><div class="actions"><span class="study-count">24</span></div></div><div class="table-head-background"></div><div class="study-list-container"><table class="table table--striped table--hoverable"><colgroup><col style="width: 100%;"></colgroup><thead class="table-head"><tr class="filters"><th><label for="filter-allFields">Search <svg name="sort" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="1em" height="1em" fill="currentColor" style="font-size: 12px;"><title>Sort</title><path d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"></path></svg></label><input type="text" id="filter-allFields" class="form-control studylist-search" value=""></th></tr></thead><tbody class="table-body" data-cy="study-list-results"><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">ACRIN-NSCLC-FDG-PET-042</div><div style="color: rgb(96, 101, 111);">ACRIN-NSCLC-FDG-PET-042</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">WB PET/CT</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT\PT" title="CT\PT">CT\PT</div><div>1月 16, 1960</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">ACRIN-NSCLC-FDG-PET-042</div><div style="color: rgb(96, 101, 111);">ACRIN-NSCLC-FDG-PET-042</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">LUNG DELAYS</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT\PT" title="CT\PT">CT\PT</div><div>1月 16, 1960</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">ACRIN-NSCLC-FDG-PET-042</div><div style="color: rgb(96, 101, 111);">ACRIN-NSCLC-FDG-PET-042</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">CT THORAX ENHANCED</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>9月 10, 1960</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">ACRIN-NSCLC-FDG-PET-042</div><div style="color: rgb(96, 101, 111);">ACRIN-NSCLC-FDG-PET-042</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">WB PET/CT</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT\PT" title="CT\PT">CT\PT</div><div>6月 24, 1960</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">ACRIN-NSCLC-FDG-PET-042</div><div style="color: rgb(96, 101, 111);">ACRIN-NSCLC-FDG-PET-042</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">CT THORAX ENHANCE</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>12月 13, 1959</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">ACRIN-NSCLC-FDG-PET-042</div><div style="color: rgb(96, 101, 111);">ACRIN-NSCLC-FDG-PET-042</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">LUNG DELAYS</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT\PT" title="CT\PT">CT\PT</div><div>6月 24, 1960</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">Bellona</div><div style="color: rgb(96, 101, 111);">0000006</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">CT CHEST W CONTRAST</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>10月 26, 2015</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">Juno</div><div style="color: rgb(96, 101, 111);">0000003</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">PETCT</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT\PT" title="CT\PT">CT\PT</div><div>12月 12, 2014</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">Juno</div><div style="color: rgb(96, 101, 111);">0000003</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">PETCT</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT\PT" title="CT\PT">CT\PT</div><div>8月 05, 2014</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">Neptune</div><div style="color: rgb(96, 101, 111);">0000002</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">DFCI CT CHEST W CONTRAST 6023</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>3月 25, 2014</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">Neptune</div><div style="color: rgb(96, 101, 111);">0000002</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">DFCI CT CHEST W CONTRAST 6023</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>9月 30, 2014</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">Neptune</div><div style="color: rgb(96, 101, 111);">0000002</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">DFCI CT CHEST W CONTRAST 6023</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>5月 22, 2014</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">PD-1-Lung-00013</div><div style="color: rgb(96, 101, 111);">PD-1-Lung-00013</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">CT CHEST W CONTRAST</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>2月 24, 2009</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">PixelMed^AperioCMU-1</div><div style="color: rgb(96, 101, 111);">PX7832548325932</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;"></div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="SM" title="SM">SM</div><div>12月 29, 2009</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="empty-value" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">(无)</div><div style="color: rgb(96, 101, 111);">PID_666</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;"></div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="SM" title="SM">SM</div><div>2月 27, 2018</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="empty-value" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">(无)</div><div style="color: rgb(96, 101, 111);">PID_47110815</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;"></div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="SM" title="SM">SM</div><div>2月 27, 2018</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">Patient^Anonymous</div><div style="color: rgb(96, 101, 111);">12345678</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">Neck^HeadNeckPETCT</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>5月 10, 2010</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">PixelMed^AperioCMU-1</div><div style="color: rgb(96, 101, 111);">PX7832548325932</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;"></div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="SM" title="SM">SM</div><div>12月 29, 2009</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">PixelMed^AperioCMU-1</div><div style="color: rgb(96, 101, 111);">PX7832548325932</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;"></div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="SM" title="SM">SM</div><div>12月 29, 2009</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">PixelMed^AperioCMU-1</div><div style="color: rgb(96, 101, 111);">PX7832548325932</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;"></div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="SM" title="SM">SM</div><div>12月 29, 2009</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">PixelMed^AperioCMU-1</div><div style="color: rgb(96, 101, 111);">PX7832548325932</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;"></div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="SM" title="SM">SM</div><div>12月 29, 2009</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">QIN-HEADNECK-01-0003</div><div style="color: rgb(96, 101, 111);">QIN-HEADNECK-01-0003</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">Thorax^1HEAD_NECK_PETCT</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT\PT\SR" title="CT\PT\SR">CT\PT\SR</div><div>3月 11, 1986</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">QIN-HEADNECK-01-0024</div><div style="color: rgb(96, 101, 111);">QIN-HEADNECK-01-0024</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">Thorax^1HEAD_NECK_PETCT</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="PT" title="PT">PT</div><div>8月 10, 1986</div></div></div></td></tr><tr class=""><td style="position: relative; overflow: hidden;"><div style="display: flex; justify-content: space-between;"><div class="" style="width: 150px; min-width: 150px;"><div style="font-weight: 500; padding-top: 3px;">Venus</div><div style="color: rgb(96, 101, 111);">0000005</div></div><div class="hide-xs" style="white-space: pre-wrap; flex-grow: 1; padding-left: 35px;">DFCI CT CHEST W CONTRAST 6023</div><div style="display: flex; flex-direction: column; max-width: 80px; width: 80px;"><div class="modalities" aria-label="CT" title="CT">CT</div><div>2月 24, 2015</div></div></div></td></tr></tbody></table><div class="pagination-area"><div class="rows-dropdown"><div class="form-inline form-group rows-per-page"><span>显示</span><select><option value="5">5</option><option value="10">10</option><option value="25" selected="">25</option><option value="50">50</option><option value="100">100</option></select><span>每页条数</span></div></div><div class="pagination-buttons"><div class="form-inline form-group page-number pull-right"><div class="col-xs-8 col-sm-9 col-md-9"><div class="form-inline form-group page-buttons noselect"><ul class="pagination-control no-margins"><li class="page-item prev"><button disabled="" class="btn page-link">上一个</button></li><li class="page-item next"><button disabled="" class="btn page-link">下一个</button></li></ul></div></div></div></div></div></div></div>
+<script type="text/javascript" src="/app.bundle.255df793a2cc1b5f17cd.js"></script>
+
+<script>
+    const testSeriesDirectory = 'http://wcb:8090/bondent/header/'
+    const path = 'D:/DICOM/CTimage/dicomVR'
+    var data;
+    const ss = axios.get('http://wcb:8090/bondent/receive/files/',{
+        params:{}
+    })
+        .then(function (response) {
+            return response;
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    const fetchFiles = ss.then(res => {
+        return res.data.map(function (file) {
+            const path = testSeriesDirectory + file;
+            console.log(path)
+            const axiosget = axios.get(path,{responseType:'blob'}).catch(error => {
+                console.log('axios get error');
+                console.log(error)
+            });
+            console.log(axiosget)
+            return axiosget.then(function (response) {
+                const jsFile = new window.File([response.data],file)
+                console.log(jsFile)
+                return jsFile
+            })
+                .catch(error => {
+                    console.log('axios get then error');
+                    console.log(error)
+                })
+        })
+    })
+    // const fetchFiles = data.data.map(function (file) {
+    //     const path = testSeriesDirectory + file;
+    //     console.log(path)
+    //     const axiosget = axios.get(path,{responseType:'blob'}).catch(error => {
+    //         console.log('axios get error');
+    //         console.log(error)
+    //     });
+    //     console.log(axiosget)
+    //     return axiosget.then(function (response) {
+    //         const jsFile = new window.File([response.data],file)
+    //         console.log(jsFile)
+    //         return jsFile
+    //     })
+    //     .catch(error => {
+    //         console.log('axios get then error');
+    //         console.log(error)
+    //     })
+    // })
+
+    console.log(fetchFiles)
+    Promise.all(fetchFiles).then((files)=>{
+        console.log(files)
+        itk.readImageDICOMFileSeries(files).then(({ webWorker , image}) => {
+            webWorker.terminate()
+            t.is(image.imageType.dimension, 3, 'dimension')
+            t.is(image.imageType.componentType, IntTypes.UInt8, 'componentType')
+            t.is(image.imageType.pixelType, PixelTypes.Scalar, 'pixelType')
+            t.is(image.imageType.components, 1, 'components')
+            t.is(image.origin[0], -17.3551, 'origin[0]')
+            t.is(image.origin[1], -133.9286, 'origin[1]')
+            t.is(image.origin[2], 116.7857, 'origin[2]')
+            t.is(image.spacing[0], 1.0, 'spacing[0]')
+            t.is(image.spacing[1], 1.0, 'spacing[1]')
+            t.is(image.spacing[2], 1.3000000000000007, 'spacing[2]')
+            t.is(getMatrixElement(image.direction, 0, 0), 0.0, 'direction (0, 0)')
+            t.is(getMatrixElement(image.direction, 0, 1), 0.0, 'direction (0, 1)')
+            t.is(getMatrixElement(image.direction, 0, 2), -1.0, 'direction (0, 2)')
+            t.is(getMatrixElement(image.direction, 1, 0), 1.0, 'direction (1, 0)')
+            t.is(getMatrixElement(image.direction, 1, 1), 0.0, 'direction (1, 1)')
+            t.is(getMatrixElement(image.direction, 1, 2), 0.0, 'direction (1, 2)')
+            t.is(getMatrixElement(image.direction, 2, 0), 0.0, 'direction (2, 0)')
+            t.is(getMatrixElement(image.direction, 2, 1), -1.0, 'direction (2, 1)')
+            t.is(getMatrixElement(image.direction, 2, 2), 0.0, 'direction (2, 2)')
+            t.is(image.size[0], 256, 'size[0]')
+            t.is(image.size[1], 256, 'size[1]')
+            t.is(image.size[2], 3, 'size[2]')
+            t.is(image.data.length, 3 * 65536, 'data.length')
+            t.is(image.data[1000], 5, 'data[1000]')
+            t.end()
+            console.log(files)
+            console.log(image)
+            const imageData = vtk.Common.DataModel.vtkITKHelper.convertItkToVtkImage(image);
+            console.log(imageData)
+
+            const cone = vtk.Filters.Sources.vtkConeSource.newInstance();
+            const actor = vtk.Rendering.Core.vtkActor.newInstance();
+            const mapper = vtk.Rendering.Core.vtkMapper.newInstance();
+            const view3d = document.getElementById("demo-element");
+            const fullScreenRenderer = vtk.Rendering.Misc.vtkFullScreenRenderWindow.newInstance({
+                rootContainer : view3d,
+                containerStyle:{
+                    height:'100%',
+                    overflow:'hidden',
+                },
+                background:[0,0,0],
+            });
+            const renderer = fullScreenRenderer.getRenderer();
+            const renderWindow = fullScreenRenderer.getRenderWindow();
+            renderWindow.getInteractor().setDesiredUpdateRate(15);
+
+            const source = imageData;
+
+            actor.setMapper(mapper);
+            mapper.setInputData(source);
+
+            const sampleDistance =
+                0.7 *
+                Math.sqrt(
+                    source.getSpacing().map((v)=>v*v).reduce((a,b)=>a+b,0),
+                );
+            // mapper.setSampleDistance(sampleDistance);
+
+            renderer.addActor(actor);
+
+            const lookupTable = vtk.Rendering.Core.vtkColorTransferFunction.newInstance();
+            // const piecewiseFunction = vtkPiecewiseFunction.newInstance();
+
+            // create color and opacity transfer functions
+            // 加了UI之后 这里的设置其实可以删除
+            lookupTable.addRGBPoint(200.0, 0.4, 0.2, 0.0);
+            lookupTable.addRGBPoint(2000.0, 1.0, 1.0, 1.0);
+
+            // piecewiseFunction.addPoint(200.0, 0.0);
+            // piecewiseFunction.addPoint(1200.0, 0.5);
+            // piecewiseFunction.addPoint(3000.0, 0.8);
+
+            // const property = actor.getProperty();
+            // console.log(property);
+            // vtk.Rendering.Core.vtkVolumeProperty.setR
+
+
+            // Control UI
+            const controllerWidget = vtk.Interaction.UI.vtkVolumeController.newInstance({
+                size: [400, 150],
+                rescaleColorMap: true,
+            });
+            controllerWidget.setContainer(view3d);
+            //controllerWidget.setupContent(renderWindow, actor, true);
+
+            // fullScreenRenderer.setResizeCallback(({ width, height }) => {
+            //     // 2px padding + 2x1px boder + 5px edge = 14
+            //     if (width > 414) {
+            //         controllerWidget.setSize(400, 150);
+            //     } else {
+            //         controllerWidget.setSize(width - 14, 150);
+            //     }
+            //     controllerWidget.render();
+            //     //fpsMonitor.update();
+            // });
+
+            // First render
+            renderer.resetCamera();
+            renderWindow.render();
+        })
+    })
+</script>
+
+</body></html>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.sun.media:clibwrapper_jiio:1.2-pre-dr-b04">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/clibwrapper_jiio/1.2-pre-dr-b04/clibwrapper_jiio-1.2-pre-dr-b04.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/clibwrapper_jiio/1.2-pre-dr-b04/clibwrapper_jiio-1.2-pre-dr-b04-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sun/media/clibwrapper_jiio/1.2-pre-dr-b04/clibwrapper_jiio-1.2-pre-dr-b04-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

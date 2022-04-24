@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="39c7e8cf-f088-425d-9d57-fbe3a6b036a8" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1yqoDkvp7vTzWMGqb1zFxkbfW0t" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/dicom" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\项目代码\ee\src\main\resources\static\css\table" />
+      <recent name="D:\项目代码\ee\src\main\resources\static" />
+      <recent name="D:\项目代码\ee\src\main\resources\static\css\cssLogin" />
+      <recent name="D:\项目代码\ee\src\main\resources\static\css\login" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bonzd.dicom.controller.interceptor" />
+      <recent name="com.bonzd.dicom.util" />
+      <recent name="com.bonzd.dicom.component" />
+      <recent name="com.bonzd.dicom.handler" />
+      <recent name="com.bonzd.dicom.event" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\项目代码\ee\src\main\resources\templates\site" />
+      <recent name="D:\项目代码\ee\src\main\resources\static\css\table" />
+      <recent name="D:\项目代码\ee\src\main\resources\static\css\cssLogin" />
+      <recent name="D:\项目代码\ee\src\main\resources\static\js\table" />
+      <recent name="D:\项目代码\ee\src\main\resources\static\css\cssLogin\images" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DicomApplication">
+    <configuration name="ConnectionTest.testMySQL" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bonzd.dicom.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bonzd.dicom" />
+      <option name="MAIN_CLASS_NAME" value="com.bonzd.dicom.ConnectionTest" />
+      <option name="METHOD_NAME" value="testMySQL" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DicomApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bonzd.dicom.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bonzd.dicom" />
+      <option name="MAIN_CLASS_NAME" value="com.bonzd.dicom.DicomApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DicomApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bonzd.dicom.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bonzd.dicom" />
+      <option name="MAIN_CLASS_NAME" value="com.bonzd.dicom.DicomApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PatientTest.testList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bonzd.dicom.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bonzd.dicom" />
+      <option name="MAIN_CLASS_NAME" value="com.bonzd.dicom.PatientTest" />
+      <option name="METHOD_NAME" value="testList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PatientTest.testfindByPatientID" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ee" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bonzd.dicom.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bonzd.dicom" />
+      <option name="MAIN_CLASS_NAME" value="com.bonzd.dicom.PatientTest" />
+      <option name="METHOD_NAME" value="testfindByPatientID" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DicomApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="ee" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bonzd.dicom.DicomApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ConnectionTest.testMySQL" />
+        <item itemvalue="JUnit.PatientTest.testList" />
+        <item itemvalue="JUnit.PatientTest.testfindByPatientID" />
+        <item itemvalue="JUnit.DicomApplicationTests.contextLoads" />
+        <item itemvalue="JUnit.DicomApplicationTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="39c7e8cf-f088-425d-9d57-fbe3a6b036a8" name="Default Changelist" comment="" />
+      <created>1632988361595</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632988361595</updated>
+      <workItem from="1632988377216" duration="5843000" />
+      <workItem from="1633652999718" duration="106458000" />
+      <workItem from="1634106511527" duration="361418000" />
+      <workItem from="1636347266094" duration="50775000" />
+      <workItem from="1636590795071" duration="19817000" />
+      <workItem from="1636620589117" duration="3587000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1197" y="484" key="#Assign_Data_Sources" timestamp="1633916939076">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1197" y="484" key="#Assign_Data_Sources/0.0.1920.1040@0.0.1920.1040" timestamp="1633916939076" />
+    <state x="431" y="260" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1632989648681">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="431" y="260" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1632989648681" />
+    <state x="695" y="320" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1634278477338">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="695" y="320" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1634278477337" />
+    <state x="824" y="249" key="#com.intellij.ide.util.MemberChooser" timestamp="1636612539666">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="824" y="249" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1636612539666" />
+    <state x="693" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636363167801">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="693" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1636363167801" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1636678311698">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1636678311698" />
+    <state width="1612" height="265" key="GridCell.Tab.0.bottom" timestamp="1636619447657">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447657" />
+    <state width="1612" height="265" key="GridCell.Tab.0.center" timestamp="1636619447656">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447656" />
+    <state width="1612" height="265" key="GridCell.Tab.0.left" timestamp="1636619447656">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447656" />
+    <state width="1612" height="265" key="GridCell.Tab.0.right" timestamp="1636619447657">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447657" />
+    <state width="1612" height="265" key="GridCell.Tab.1.bottom" timestamp="1636619447658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447658" />
+    <state width="1612" height="265" key="GridCell.Tab.1.center" timestamp="1636619447658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447658" />
+    <state width="1612" height="265" key="GridCell.Tab.1.left" timestamp="1636619447658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447658" />
+    <state width="1612" height="265" key="GridCell.Tab.1.right" timestamp="1636619447658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447658" />
+    <state width="1612" height="265" key="GridCell.Tab.2.bottom" timestamp="1636619447658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447658" />
+    <state width="1612" height="265" key="GridCell.Tab.2.center" timestamp="1636619447658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447658" />
+    <state width="1612" height="265" key="GridCell.Tab.2.left" timestamp="1636619447658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447658" />
+    <state width="1612" height="265" key="GridCell.Tab.2.right" timestamp="1636619447658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1612" height="265" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1636619447658" />
+    <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1632989626704">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1040@0.0.1920.1040" timestamp="1632989626704" />
+    <state x="862" y="269" key="Maven.ArtifactSearchDialog" timestamp="1633763375980">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="862" y="269" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633763375980" />
+    <state x="621" y="393" key="run.anything.popup" timestamp="1636590861663">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="621" y="393" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1636590861663" />
+    <state x="619" y="180" width="672" height="676" key="search.everywhere.popup" timestamp="1635830839408">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="619" y="180" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1635830839408" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="reader.attr" />
+        <watch expression="((HashMap)map).entrySet().toArray()[1]" custom="java.util.HashMap" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

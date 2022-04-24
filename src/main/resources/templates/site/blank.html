@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" th:href="@{/img/favicon.html}">
+
+    <title>MPR图像查看</title>
+
+<!--    <link th:href="@{/css/table/tableStyle.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/css/table/main.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/css/table/mmGrid.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/css/table/mmPaginator.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css}" rel="stylesheet" type="text/css" media="screen"/>-->
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/cssLogin/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/cssLogin/bootstrap-reset.css}" rel="stylesheet">
+    <!--external css-->
+    <link th:href="@{/assets/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/cssLogin/style.css}" rel="stylesheet">
+    <link th:href="@{/css/cssLogin/jquery.mCustomScrollbar.css}" rel="stylesheet"/>
+    <link th:href="@{/css/cssLogin/style-responsive.css}" rel="stylesheet" />
+    <link th:href="@{/css/loading/loading.css}" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+  <section id="container" >
+      <!--header start-->
+      <header class="header white-bg" th:replace="site/index::header">
+          <div class="sidebar-toggle-box">
+              <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+          </div>
+          <!--logo start-->
+          <a href="#" class="logo" >Flat<span>lab</span></a>
+          <!--logo end-->
+          <div class="nav notify-row" id="top_menu">
+            <!--  notification start -->
+            <ul class="nav top-menu">
+              <!-- settings start -->
+              <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                      <i class="icon-tasks"></i>
+                      <span class="badge bg-success">6</span>
+                  </a>
+                  <ul class="dropdown-menu extended tasks-bar">
+                      <div class="notify-arrow notify-arrow-green"></div>
+                      <li>
+                          <p class="green">You have 6 pending tasks</p>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <div class="task-info">
+                                  <div class="desc">Dashboard v1.3</div>
+                                  <div class="percent">40%</div>
+                              </div>
+                              <div class="progress progress-striped">
+                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                      <span class="sr-only">40% Complete (success)</span>
+                                  </div>
+                              </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <div class="task-info">
+                                  <div class="desc">Database Update</div>
+                                  <div class="percent">60%</div>
+                              </div>
+                              <div class="progress progress-striped">
+                                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                      <span class="sr-only">60% Complete (warning)</span>
+                                  </div>
+                              </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <div class="task-info">
+                                  <div class="desc">Iphone Development</div>
+                                  <div class="percent">87%</div>
+                              </div>
+                              <div class="progress progress-striped">
+                                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 87%">
+                                      <span class="sr-only">87% Complete</span>
+                                  </div>
+                              </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <div class="task-info">
+                                  <div class="desc">Mobile App</div>
+                                  <div class="percent">33%</div>
+                              </div>
+                              <div class="progress progress-striped">
+                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
+                                      <span class="sr-only">33% Complete (danger)</span>
+                                  </div>
+                              </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <div class="task-info">
+                                  <div class="desc">Dashboard v1.3</div>
+                                  <div class="percent">45%</div>
+                              </div>
+                              <div class="progress progress-striped active">
+                                  <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                      <span class="sr-only">45% Complete</span>
+                                  </div>
+                              </div>
+
+                          </a>
+                      </li>
+                      <li class="external">
+                          <a href="#">See All Tasks</a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- settings end -->
+              <!-- inbox dropdown start-->
+              <li id="header_inbox_bar" class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                      <i class="icon-envelope-alt"></i>
+                      <span class="badge bg-important">5</span>
+                  </a>
+                  <ul class="dropdown-menu extended inbox">
+                      <div class="notify-arrow notify-arrow-red"></div>
+                      <li>
+                          <p class="red">You have 5 new messages</p>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="photo"><img alt="avatar" src="img/avatar-mini.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Jonathan Smith</span>
+                                    <span class="time">Just now</span>
+                                    </span>
+                                    <span class="message">
+                                        Hello, this is an example msg.
+                                    </span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="photo"><img alt="avatar" src="img/avatar-mini2.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Jhon Doe</span>
+                                    <span class="time">10 mins</span>
+                                    </span>
+                                    <span class="message">
+                                     Hi, Jhon Doe Bhai how are you ?
+                                    </span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="photo"><img alt="avatar" src="img/avatar-mini3.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Jason Stathum</span>
+                                    <span class="time">3 hrs</span>
+                                    </span>
+                                    <span class="message">
+                                        This is awesome dashboard.
+                                    </span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="photo"><img alt="avatar" src="img/avatar-mini4.jpg"></span>
+                                    <span class="subject">
+                                    <span class="from">Jondi Rose</span>
+                                    <span class="time">Just now</span>
+                                    </span>
+                                    <span class="message">
+                                        Hello, this is metrolab
+                                    </span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">See all messages</a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- inbox dropdown end -->
+              <!-- notification dropdown start-->
+              <li id="header_notification_bar" class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                      <i class="icon-bell-alt"></i>
+                      <span class="badge bg-warning">7</span>
+                  </a>
+                  <ul class="dropdown-menu extended notification">
+                      <div class="notify-arrow notify-arrow-yellow"></div>
+                      <li>
+                          <p class="yellow">You have 7 new notifications</p>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="label label-danger"><i class="icon-bolt"></i></span>
+                              Server #3 overloaded.
+                              <span class="small italic">34 mins</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="label label-warning"><i class="icon-bell"></i></span>
+                              Server #10 not respoding.
+                              <span class="small italic">1 Hours</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="label label-danger"><i class="icon-bolt"></i></span>
+                              Database overloaded 24%.
+                              <span class="small italic">4 hrs</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="label label-success"><i class="icon-plus"></i></span>
+                              New user registered.
+                              <span class="small italic">Just now</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span class="label label-info"><i class="icon-bullhorn"></i></span>
+                              Application error.
+                              <span class="small italic">10 mins</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">See all notifications</a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- notification dropdown end -->
+          </ul>
+          </div>
+          <div class="top-nav ">
+              <ul class="nav pull-right top-menu">
+                  <li>
+                      <input type="text" class="form-control search" placeholder="Search">
+                  </li>
+                  <!-- user login dropdown start-->
+                  <li class="dropdown">
+                      <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                          <img alt="" src="img/avatar1_small.jpg">
+                          <span class="username">Jhon Doue</span>
+                          <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu extended logout">
+                          <div class="log-arrow-up"></div>
+                          <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                          <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+                          <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
+                          <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                      </ul>
+                  </li>
+                  <!-- user login dropdown end -->
+              </ul>
+          </div>
+      </header>
+      <!--header end-->
+      <!--sidebar start-->
+
+      <aside>
+          <div id="sidebar"  class="nav-collapse">
+
+              <ul class="sidebar-menu">
+
+                  <div class="panel-body">
+                      <div class="btn btn-white dropdown-toggle">
+                              <table>
+                                  <tr>
+                                      <td>
+                                        <label for="checkboxOrthogality">保持相互垂直:</label>
+                                          <input type="checkbox" id="checkboxOrthogality" checked>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <label for="checkboxRotation">允许旋转:</label>
+                                          <input type="checkbox" id="checkboxRotation" checked>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td><label for="checkboxTranslation">允许平移:</label>
+                                          <input type="checkbox" id="checkboxTranslation" checked>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <label for="checkboxTranslation">以像素为单位:</label>
+                                          <input type="checkbox" id="checkboxScaleInPixels" checked>
+                                      </td>
+                                  </tr>
+
+                                  <tr>
+                                      <td>
+                                          <label>
+                                              <input type="radio" name="model" value="Teeth" checked>Teeth
+                                          </label>
+                                          <label>
+                                              <input type="radio" name="model" value="Bone">Bone
+                                          </label>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <label>
+                                              <input type="radio" name="model" value="Gray">Gray
+                                          </label>
+<!--                                          <label>-->
+<!--                                              <input type="radio" name="model" value="Tissu">Tissu-->
+<!--                                          </label>-->
+                                      </td>
+                                  </tr>
+
+                                  <tr>
+                                      <td><input id='slabNumber1' type="range" min="-100" max="100" step="2" value="0" style="width: 100px;"/></td>
+                                      <td id='slabNumberValue1'>0</td>
+                                  </tr>
+                                  <tr>
+                                      <td><input id='slabNumber2' type="range" min="-100" max="100" step="2" value="0" style="width: 100px;"/></td>
+                                      <td id='slabNumberValue2'>0</td>
+                                  </tr>
+                                  <tr>
+                                      <td><input id='slabNumber3' type="range" min="0" max="100" step="2" value="100" style="width: 100px;"/></td>
+                                      <td id='slabNumberValue3'>100</td>
+                                  </tr>
+
+                                  <tr>
+                                      <td><button class="btn btn-danger" id="buttonReset">重置图像:</button></td>
+                                  </tr>
+                              </table>
+                      </div>
+                  </div>
+              </ul>
+
+          </div>
+      </aside>
+      <!--sidebar end-->
+      <!--main content start-->
+      <section id="main-content">
+
+          <div id="htmleaf" class="htmleaf-container">
+              <div data-to-value='80' data-items-count='32' id="p1_barPie" class="barPie barPie--radio">
+                  <span class="barPie__value">0</span>
+                  <div class="barPie__ring">
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem31" value="100" hidden="hidden"/>
+                      <label for="p1_barPieItem31" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem30" value="96.875" hidden="hidden"/>
+                      <label for="p1_barPieItem30" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem29" value="93.75" hidden="hidden"/>
+                      <label for="p1_barPieItem29" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem28" value="90.625" hidden="hidden"/>
+                      <label for="p1_barPieItem28" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem27" value="87.5" hidden="hidden"/>
+                      <label for="p1_barPieItem27" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem26" value="84.375" hidden="hidden"/>
+                      <label for="p1_barPieItem26" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem25" value="81.25" hidden="hidden"/>
+                      <label for="p1_barPieItem25" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem24" value="78.125" hidden="hidden"/>
+                      <label for="p1_barPieItem24" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem23" value="75" hidden="hidden"/>
+                      <label for="p1_barPieItem23" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem22" value="71.875" hidden="hidden"/>
+                      <label for="p1_barPieItem22" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem21" value="68.75" hidden="hidden"/>
+                      <label for="p1_barPieItem21" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem20" value="65.625" hidden="hidden"/>
+                      <label for="p1_barPieItem20" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem19" value="62.5" hidden="hidden"/>
+                      <label for="p1_barPieItem19" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem18" value="59.375" hidden="hidden"/>
+                      <label for="p1_barPieItem18" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem17" value="56.25" hidden="hidden"/>
+                      <label for="p1_barPieItem17" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem16" value="53.125" hidden="hidden"/>
+                      <label for="p1_barPieItem16" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem15" value="50" hidden="hidden"/>
+                      <label for="p1_barPieItem15" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem14" value="46.875" hidden="hidden"/>
+                      <label for="p1_barPieItem14" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem13" value="43.75" hidden="hidden"/>
+                      <label for="p1_barPieItem13" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem12" value="40.625" hidden="hidden"/>
+                      <label for="p1_barPieItem12" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem11" value="37.5" hidden="hidden"/>
+                      <label for="p1_barPieItem11" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem10" value="34.375" hidden="hidden"/>
+                      <label for="p1_barPieItem10" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem9" value="31.25" hidden="hidden"/>
+                      <label for="p1_barPieItem9" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem8" value="28.125" hidden="hidden"/>
+                      <label for="p1_barPieItem8" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem7" value="25" hidden="hidden"/>
+                      <label for="p1_barPieItem7" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem6" value="21.875" hidden="hidden"/>
+                      <label for="p1_barPieItem6" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem5" value="18.75" hidden="hidden"/>
+                      <label for="p1_barPieItem5" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem4" value="15.625" hidden="hidden"/>
+                      <label for="p1_barPieItem4" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem3" value="12.5" hidden="hidden"/>
+                      <label for="p1_barPieItem3" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem2" value="9.375" hidden="hidden"/>
+                      <label for="p1_barPieItem2" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem1" value="6.25" hidden="hidden"/>
+                      <label for="p1_barPieItem1" class="barPie__ring__item"><div></div></label>
+                      <input type="radio" name="barPieRadioGroup" id="p1_barPieItem0" value="3.125" hidden="hidden"/>
+                      <label for="p1_barPieItem0" class="barPie__ring__item"><div></div></label>
+                  </div>
+                  <div class="circleProgress_wrapper">
+                      <div class="wrapper1 right">
+                          <div class="circleProgress rightcircle"></div>
+                      </div>
+                      <div class="wrapper1 left">
+                          <div class="circleProgress leftcircle"></div>
+                      </div>
+                      <div class="zhongxing"></div>
+                      <div class=""></div>
+                  </div>
+                  <div id="div_text" style="font-size: x-small;padding-top: 50px;display: none">文件加载完成，渲染中，请稍等···</div>
+              </div>
+          </div>
+
+          <section id="wrapper" class="wrapper" >
+              <div class="row" >
+                  <div class="col-lg-12">
+                      <ul class="breadcrumb">
+                          <li>
+                              <a th:href="@{/index}">
+                                  <i class="icon-home"></i>首页
+                              </a>
+                          </li>
+                          <li>
+                              <a th:href="@{/bonzd/patient}">
+                                  患者页面
+                              </a>
+                          </li>
+                          <li class="active">
+                              <a href="#">
+                                  MPR图像查看
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <!-- page start-->
+              <div id="div1" class="mpr" style="visibility:hidden"></div>
+              <div id="div2" class="mpr" style="visibility:hidden"></div>
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script th:src="@{/js/page/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/page/jquery.scrollTo.min.js}"></script>
+    <script th:src="@{/js/page/itk.js}"></script>
+    <script th:src="@{/js/page/vtk.js}"></script>
+    <script th:src="@{/js/page/jquery.nicescroll.js}" type="text/javascript"></script>
+<!--    <script type="text/javascript" src="https://unpkg.com/vtk.js@20.4.1/vtk.js"></script>-->
+<!--    <script type="text/javascript" src="https://unpkg.com/itk@14.1.1/umd/itk.js"></script>-->
+    <script type="text/javascript" th:src="@{/js/page/axios.min.js}"></script>
+    <!--common script for all pages-->
+    <script th:src="@{/js/page/common-scripts.js}"></script>
+    <script th:src="@{/js/page/form-component.js}"></script>
+<!--    <script th:src="@{/js/utils/radialIndicator.min.js}"></script>-->
+
+    <script>
+        function rgbToHex(r, g, b){
+            let hex = ((r<<16) | (g<<8) | b).toString(16);
+            return "#" + new Array(Math.abs(hex.length-7)).join("0") + hex;
+        }
+
+        // hex to rgb
+        function hexToRgb(hex){
+            var rgb = [];
+            for(var i=1; i<7; i+=2){
+                rgb.push(parseInt("0x" + hex.slice(i,i+2)));
+            }
+            return rgb;
+        }
+
+        // 计算渐变过渡色
+        function gradient (startColor,endColor,step){
+            // 将 hex 转换为rgb
+            let sColor = hexToRgb(startColor),
+                eColor = hexToRgb(endColor);
+
+            // 计算R\G\B每一步的差值
+            let rStep = (eColor[0] - sColor[0]) / step,
+            gStep = (eColor[1] - sColor[1]) / step,
+            bStep = (eColor[2] - sColor[2]) / step;
+
+            let gradientColorArr = [];
+            for(let i=0;i<step;i++){
+                // 计算每一步的hex值
+                gradientColorArr.push(rgbToHex(parseInt(rStep*i+sColor[0]),parseInt(gStep*i+sColor[1]),parseInt(bStep*i+sColor[2])));
+            }
+            return gradientColorArr;
+        }
+        let startColor = '#ec9089';
+        let endColor = '#c12927';
+        let step = 33;
+        let colorArr = gradient(startColor, endColor, 32);
+
+        //内圆圈动画
+        function percent(percent) {
+            if (percent <= 50) {
+                let xz=45+3.6 * percent;
+                $('.rightcircle').css("transform", "rotate(" + xz + "deg)");
+            } else if (percent <=100) {
+                let xz=45+3.6 * (percent-50);
+                $('.rightcircle').css("transform", "rotate(225deg)");
+                $('.rightcircle').css("display", "none");
+                $('.leftcircle').css("transform", "rotate(" + xz + "deg)");
+            }
+        }
+
+        function shuzi(bfb){
+            $({
+                // 起始值
+                countNum: bfb
+            }).animate({
+                // 最终值
+                countNum: bfb
+            }, {
+                // 动画持续时间
+                duration: 2000,
+                easing: "linear",
+                step: function() {
+                    // 设置每步动画计算的数值
+                    $('.barPie__value').text(Math.round((this.countNum*100)/100));
+                    let djge=Math.floor(this.countNum/3.125);
+                    $("[for='p1_barPieItem"+djge+"']").find("div").addClass("gaoliang");
+                    $("[for='p1_barPieItem"+djge+"']").find("div").css("background",colorArr[djge]);
+                    // console.log(djge);
+                },
+                complete: function() {
+                    // 设置动画结束的数值
+                    $('.barPie__value').text(this.countNum);
+                }
+            });
+        }
+
+        const testSeriesDirectory = 'http://wcb:8085/dicom/bonzd/header/';
+        // const testSeriesDirectory = 'http://139.196.221.241:8085/dicom/bonzd/header1/';
+        const data = axios.get('http://wcb:8085/dicom/bonzd/files/'+[[${pkTBLSeriesID}]],{
+        // const data = axios.get('http://139.196.221.241:8085/dicom/bonzd/files/'+[[${pkTBLSeriesID}]],{
+            params:{}
+        })
+        .then(function (response) {
+            console.log(response.data.length);
+            let l = response.data.length;
+            let lj = response.data.length;
+            const fetchFiles = response.data.map(function (file) {
+                const path = testSeriesDirectory + file + '.dcm';
+                const axiosget = axios.get(path,{responseType:'blob'}).catch(error =>
+                {
+                    console.log('axios get error');
+                    console.log(error)
+                });
+                return axiosget.then(function (response) {
+                    const jsFile = new window.File([response.data],file);
+                    l--;
+                    let bfb = (lj-l)/lj*100;
+                    if(bfb===100){
+                        $('#div_text').show();
+                    }
+                    shuzi(bfb);
+                    return jsFile;
+                }).catch(error => {
+                    console.log('axios get then error');
+                    console.log(error)
+                });
+            });
+            function setCamera(sliceMode, renderer, data) {
+                const ijk = [0, 0, 0];
+                const position = [0, 0, 0];
+                const focalPoint = [0, 0, 0];
+                data.indexToWorld(ijk, focalPoint);
+                console.log(data.indexToWorld(ijk, focalPoint));
+                ijk[sliceMode] = 1;
+                data.indexToWorld(ijk, position);
+                console.log(data.indexToWorld(ijk, position));
+                // renderer.getActiveCamera().set({ focalPoint, position });
+                renderer.resetCamera();
+            };
+            function updateControlPanel(im, ds) {
+                const slicingMode = im.getSlicingMode();
+                const extent = ds.getExtent();
+                // document.querySelector('.slice').setAttribute('min', extent[slicingMode * 2]);
+                // document.querySelector('.slice').setAttribute('max', extent[slicingMode * 2 + 1]);
+            };
+            function ready(scope, picking = false) {
+                scope.renderer.resetCamera();
+                scope.grw.resize();
+                if (picking) {
+                    scope.widgetManager.enablePicking();
+                } else {
+                    scope.widgetManager.disablePicking();
+                };
+            };
+
+
+            const viewColors = [
+                [0,0,0],
+                [0,0,0],
+                [0,0,0],
+                [0,0,0],
+            ];
+            const ViewTypes = {
+                DEFAULT: 0,
+                GEOMETRY: 1,
+                SLICE: 2,
+                VOLUME: 3,
+                YZ_PLANE: 4, // Sagittal
+                XZ_PLANE: 5, // Coronal
+                XY_PLANE: 6, // Axial
+            };
+            const xyzToViewType = [
+                ViewTypes.YZ_PLANE,
+                ViewTypes.XZ_PLANE,
+                ViewTypes.XY_PLANE,
+            ];
+
+            const viewAttributes = [];
+            const widgets = {};
+            const vtkMath = vtk.Common.Core.vtkMath;
+
+            const painter = vtk.Filters.General.vtkPaintFilter.newInstance();
+            widgets.widget = vtk.Widgets.Widgets3D.vtkResliceCursorWidget.newInstance();
+            widgets.paintWidget = vtk.Widgets.Widgets3D.vtkPaintWidget.newInstance();
+
+            const widgetState = widgets.widget.getWidgetState();
+
+            widgetState.setKeepOrthogonality(true);
+            widgetState.setOpacity(0.6);
+            widgetState.setSphereRadius(3);
+            widgetState.setLineThickness(2);
+
+            const showDebugActors = true;
+
+            const container1 = document.getElementById('div1');
+            const container2 = document.getElementById('div2');
+
+            function createRGBStringFromRGBValues(rgb) {
+                if (rgb.length !== 3){
+                    return 'rgb(0,0,0)';
+                }
+                return 'rgb(${(rgb[0]*255).toString()},${(rgb[1]*255).toString()},${(rgb[2]*255).toString()})';
+            }
+
+            const initialPlanesState = {...widgetState.getPlanes()};
+
+
+            let view3D = null;
+            for (let i=0;i<4;i++){
+                const element = document.createElement('div');
+                element.setAttribute('class','view');
+                element.style.width = '49.9%';
+                element.style.height = '400px';
+                element.style.display = 'inline-block';
+                element.style.marginRight = '1px';
+                if (i<2){
+                    container1.appendChild(element);
+                }else{
+                    container2.appendChild(element);
+                }
+
+                const grw = vtk.Rendering.Misc.vtkGenericRenderWindow.newInstance();
+                grw.setContainer(element);
+                grw.resize();
+
+                const obj = {
+                    grw: grw,
+                    renderWindow: grw.getRenderWindow(),
+                    renderer: grw.getRenderer(),
+                    GLWindow: grw.getOpenGLRenderWindow(),
+                    interactor: grw.getInteractor(),
+                    widgetManager: vtk.Widgets.Core.vtkWidgetManager.newInstance(),
+                };
+
+                obj.renderer.getActiveCamera().setParallelProjection(true);
+                obj.renderer.setBackground(...viewColors[i]);
+                obj.renderWindow.addRenderer(obj.renderer);
+                obj.renderWindow.addView(obj.GLWindow);
+                obj.renderWindow.setInteractor(obj.interactor);
+                obj.interactor.setView(obj.GLWindow);
+                obj.interactor.initialize();
+                obj.interactor.bindEvents(element);
+                obj.widgetManager.setRenderer(obj.renderer);
+
+                if (i<3){
+                    obj.istyle = vtk.Interaction.Style.vtkInteractorStyleImage.newInstance();
+                    // obj.istyle.setInteractionMode('IMAGE_SLICING');
+                    obj.interactor.setInteractorStyle(obj.istyle);//运动控制
+
+                    obj.widgetInstance = obj.widgetManager.addWidget(widgets.widget, xyzToViewType[i]);
+                    obj.widgetInstance.setScaleInPixels(true);
+                    obj.widgetInstance.setRotationHandlePosition(0.75);
+
+                    obj.paintHandle = obj.widgetManager.addWidget(widgets.paintWidget,xyzToViewType[i]);
+
+                    // obj.widgetManager.grabFocus(widgets.paintWidget);
+
+                    obj.widgetManager.enablePicking();
+                    // Use to update all renderers buffer when actors are moved
+                    obj.widgetManager.setCaptureOn(
+                        vtk.Widgets.Core.vtkWidgetManager.Constants.CaptureOn.MOUSE_RELEASE
+                    );
+
+
+                }else {
+                    obj.renderWindow.getInteractor().setDesiredUpdateRate(15);
+                    obj.interactor.setInteractorStyle(
+                        vtk.Interaction.Style.vtkInteractorStyleTrackballCamera.newInstance()
+                    );
+                }
+
+                if (i<3){
+                    obj.reslice = vtk.Imaging.Core.vtkImageReslice.newInstance();
+                    obj.reslice.setSlabMode(vtk.Imaging.Core.vtkImageReslice.SlabMode.MEAN);
+                    obj.reslice.setSlabNumberOfSlices(1);
+                    obj.reslice.setTransformInputSampling(false);
+                    obj.reslice.setAutoCropOutput(true);
+                    obj.reslice.setOutputDimensionality(2);
+
+                    obj.resliceMapper = vtk.Rendering.Core.vtkImageMapper.newInstance();
+                    obj.resliceMapper.setInputConnection(obj.reslice.getOutputPort());
+
+                    obj.resliceActor = vtk.Rendering.Core.vtkImageSlice.newInstance();
+                    obj.resliceActor.setMapper(obj.resliceMapper);
+                    obj.resliceActor.getProperty().setColorLevel(1300);
+                    obj.resliceActor.getProperty().setColorWindow(4400);
+
+                    obj.labelMap = {
+                        imageMapper: vtk.Rendering.Core.vtkImageMapper.newInstance(),
+                        actor: vtk.Rendering.Core.vtkImageSlice.newInstance(),
+                        cfun: vtk.Rendering.Core.vtkColorTransferFunction.newInstance(),
+                        ofun: vtk.Common.DataModel.vtkPiecewiseFunction.newInstance(),
+                    };
+
+                    obj.painter = vtk.Filters.General.vtkPaintFilter.newInstance();
+                    // obj.painter.setBackgroundImage(obj.reslice.getOutputData());
+                    obj.labelMap.actor.setMapper(obj.labelMap.imageMapper);
+                    obj.labelMap.imageMapper.setInputConnection(obj.painter.getOutputPort());
+
+                    obj.labelMap.cfun.addRGBPoint(1,0,0,1);
+                    obj.labelMap.ofun.addPoint(0,0);
+                    obj.labelMap.ofun.addPoint(1,1);
+
+                    obj.labelMap.actor.getProperty().setRGBTransferFunction(obj.labelMap.cfun);
+                    obj.labelMap.actor.getProperty().setPiecewiseFunction(obj.labelMap.ofun);
+
+                    obj.labelMap.actor.getProperty().setOpacity(0.5);
+
+
+                }else {
+                    obj.mapper = vtk.Rendering.Core.vtkVolumeMapper.newInstance();
+                    obj.property = vtk.Rendering.Core.vtkVolumeProperty.newInstance();
+                    obj.actor = vtk.Rendering.Core.vtkVolume.newInstance();
+
+                    obj.originWindow = 5300;
+                    obj.originLevel = 600;
+                    obj.originOpacity = 1.0;
+
+                    obj.m_CurWindow = obj.originWindow;
+                    obj.m_CurLevel = obj.originLevel;
+                    obj.m_CurOpacity = obj.originOpacity;
+
+                    obj.min_level = obj.m_CurLevel - obj.m_CurWindow / 2;
+
+
+                    obj.ctfun = vtk.Rendering.Core.vtkColorTransferFunction.newInstance();
+                    obj.ofun = vtk.Common.DataModel.vtkPiecewiseFunction.newInstance();
+
+                    obj.ctfun.addRGBSegment(obj.min_level, 0.0, 0, 0, obj.min_level + 0.1301 * obj.m_CurWindow, 0, 0, 0);
+                    obj.ctfun.addRGBSegment(obj.min_level + 0.1301 * obj.m_CurWindow, 0, 0, 0, obj.min_level + 0.4151 * obj.m_CurWindow, 0.6, 0, 0);
+                    obj.ctfun.addRGBSegment(obj.min_level + 0.4151 * obj.m_CurWindow, 0.6, 0, 0, obj.min_level + 0.7283 * obj.m_CurWindow, 0.8588, 0.6667, 0.298);
+                    obj.ctfun.addRGBSegment(obj.min_level + 0.7283 * obj.m_CurWindow, 0.8588, 0.6667, 0.320, obj.min_level + 0.9566 * obj.m_CurWindow, 1, 1, 1);
+                    obj.ctfun.addRGBSegment(obj.min_level + 0.9566 * obj.m_CurWindow, 1, 1, 1, obj.min_level + obj.m_CurWindow, 1, 1, 1);
+
+                    obj.ofun.addSegment(obj.min_level, 0, obj.min_level + obj.m_CurWindow, obj.m_CurOpacity);
+                    obj.ofun.addSegment(obj.min_level, 0, obj.min_level + 0.4660 * obj.m_CurWindow, 0);
+                    obj.ofun.addSegment(obj.min_level + 0.4660 * obj.m_CurWindow, 0, obj.min_level + 0.7019 * obj.m_CurWindow, 0.28 * obj.m_CurOpacity);
+                    obj.ofun.addSegment(obj.min_level + 0.7019 * obj.m_CurWindow, 0.28 * obj.m_CurOpacity, obj.min_level + 1 * obj.m_CurWindow, 0.5* obj.m_CurOpacity);
+
+                    obj.property.setRGBTransferFunction(0, obj.ctfun);
+                    obj.property.setScalarOpacity(0, obj.ofun);
+                    //obj.property.setScalarOpacityUnitDistance(0, 0.8919);
+                    obj.property.setInterpolationTypeToLinear();
+                    obj.property.setShade(0);
+                    obj.actor.setProperty(obj.property);
+                    obj.actor.setMapper(obj.mapper);
+                }
+
+                obj.sphereActors = [];
+                obj.sphereSources = [];
+
+                for (let j=0;j<3;j++){
+                    const sphere = vtk.Filters.Sources.vtkSphereSource.newInstance();
+                    sphere.setRadius(0);
+                    const mapper = vtk.Rendering.Core.vtkMapper.newInstance();
+                    mapper.setInputConnection(sphere.getOutputPort());
+                    const actor = vtk.Rendering.Core.vtkActor.newInstance();
+                    actor.setMapper(mapper);
+                    actor.getProperty().setColor(...viewColors[i]);
+                    actor.setVisibility(showDebugActors);
+
+                    obj.sphereActors.push(actor);
+                    obj.sphereSources.push(sphere);
+                }
+
+                if (i<3){
+                    viewAttributes.push(obj);
+                }else {
+                    view3D = obj;
+                }
+                function readyAll() {
+                    ready(obj, true);
+                };
+
+                const axes = vtk.Rendering.Core.vtkAnnotatedCubeActor.newInstance();
+                axes.setDefaultStyle({
+                    text: '+X',
+                    fontStyle: 'bold',
+                    fontFamily: 'Arial',
+                    fontColor: 'white',
+                    fontSizeScale: (res) => res / 2,
+                    faceColor: createRGBStringFromRGBValues(viewColors[0]),
+                    faceRotation: 0,
+                    edgeThickness: 0.1,
+                    edgeColor: 'black',
+                    resolution: 400,
+                });
+
+                axes.setXMinusFaceProperty({
+                    text: '-X',
+                    faceColor: createRGBStringFromRGBValues(viewColors[0]),
+                    faceRotation: 90,
+                    fontStyle: 'italic',
+                });
+
+                axes.setYPlusFaceProperty({
+                    text: '+Y',
+                    faceColor: createRGBStringFromRGBValues(viewColors[1]),
+                    fontSizeScale: (res) => res / 4,
+                });
+
+                axes.setYMinusFaceProperty({
+                    text: '-Y',
+                    faceColor: createRGBStringFromRGBValues(viewColors[1]),
+                    fontColor: 'white',
+                });
+
+                axes.setZPlusFaceProperty({
+                    text: '+Z',
+                    faceColor: createRGBStringFromRGBValues(viewColors[2]),
+                });
+
+                axes.setZMinusFaceProperty({
+                    text: '-Z',
+                    faceColor: createRGBStringFromRGBValues(viewColors[2]),
+                    faceRotation: 45,
+                });
+
+                const orientationWidget = vtk.Interaction.Widgets.vtkOrientationMarkerWidget.newInstance({
+                    actor: axes,
+                    interactor: obj.renderWindow.getInteractor(),
+                });
+                orientationWidget.setEnabled(true);
+                orientationWidget.setViewportCorner(
+                    vtk.Interaction.Widgets.vtkOrientationMarkerWidget.Corners.BOTTOM_RIGHT
+                );
+                orientationWidget.setViewportSize(0.1);
+                orientationWidget.setMinPixelSize(100);
+                orientationWidget.setMaxPixelSize(300);
+            }
+
+
+
+            function updateReslice(
+                interactionContext={
+                    viewType: '',
+                    reslice: null,
+                    actor: null,
+                    renderer: null,
+                    resetFocalPoint: false,
+                    keepFocalPointPosition: false,
+                    computeFocalPointOffset: false,
+                    spheres: null,
+                }
+            ) {
+                const obj = widgets.widget.updateReslicePlane(
+                    interactionContext.reslice,
+                    interactionContext.viewType
+                );
+                if (obj.modified){
+                    interactionContext.actor.setUserMatrix(
+                        interactionContext.reslice.getResliceAxes()
+                    );
+                    interactionContext.sphereSources[0].setCenter(...obj.origin);
+                    interactionContext.sphereSources[1].setCenter(...obj.point1);
+                    interactionContext.sphereSources[2].setCenter(...obj.point2);
+                };
+                widgets.widget.updateCameraPoints(
+                    interactionContext.renderer,
+                    interactionContext.viewType,
+                    interactionContext.resetFocalPoint,
+                    interactionContext.keepFocalPointPosition,
+                    interactionContext.computeFocalPointOffset
+                );
+                view3D.renderWindow.render();
+                return obj.modified;
+            }
+
+            // vtk.IO.Misc.vtkITKPolyDataReader.newInstance().setReadPolyDataArrayBufferFromITK(fetchFiles);
+            Promise.all(fetchFiles).then((files)=>{
+                 itk.readImageDICOMFileSeries(files).then(({image}) => {
+
+                    const imageData1 = vtk.Common.DataModel.vtkITKHelper.convertItkToVtkImage(image);
+
+                    widgets.widget.setImage(imageData1);
+
+                    // const outline = vtk.Filters.General.vtkOutlineFilter.newInstance();
+                    // outline.setInputData(imageData1);
+                    // const outlineMapper = vtk.Rendering.Core.vtkMapper.newInstance();
+                    // outlineMapper.setInputData(outline.getOutputData());
+                    // const outlineActor = vtk.Rendering.Core.vtkActor.newInstance();
+                    // outlineActor.setMapper(outlineMapper);
+
+                    view3D.mapper.setInputData(imageData1);
+                    view3D.renderer.addActor(view3D.actor);
+                    // view3D.renderer.addActor(outlineActor);
+
+                    viewAttributes.forEach((obj,i)=>{
+
+                        obj.reslice.setInputData(imageData1);
+                        // obj.painter.setBackgroundImage(obj.reslice.getOutputData());
+
+                        obj.renderer.addViewProp(obj.resliceActor);
+                        obj.renderer.addViewProp(obj.labelMap.actor);
+
+                        obj.painter.setBackgroundImage(obj.reslice.getOutputData());
+
+                        obj.painter.setLabel(0);
+                        // obj.painter.setSlicingMode(4);
+
+                        // const o = vtk.Rendering.Core.vtkImageMapper.newInstance().SlicingMode.K;
+
+                        // console.log(obj.reslice.getSlicingMode());
+                        // console.log(obj.reslice.imageMapper.getSlicingModeNormal());
+
+
+                        obj.sphereActors.forEach((actor)=>{
+                            obj.renderer.addActor(actor);
+                            view3D.renderer.addActor(actor);
+                        });
+
+                        // obj.resliceMapper.setSlicingMode(i);
+                        // obj.resliceMapper.setSlice(0);
+                        // setCamera(i,obj.renderer,imageData1);
+                        // updateControlPanel(obj.resliceMapper,imageData1);
+                        const update = () => {
+                            const slicingMode = obj.resliceMapper.getSlicingMode() % 3;
+                            if (slicingMode > -1) {
+                                const ijk = [0, 0, 0];
+                                const position = [0, 0, 0];
+                                // position
+                                ijk[slicingMode] = obj.resliceMapper.getSlice();
+                                imageData1.indexToWorld(ijk, position);
+                                widgets.paintWidget.getManipulator().setOrigin(position);
+                                obj.painter.setSlicingMode(slicingMode);
+                                obj.paintHandle.updateRepresentationForRender();
+                                // update labelMap layer
+                                obj.labelMap.imageMapper.set(obj.resliceMapper.get('slice', 'slicingMode'));
+                                // update UI
+                                document.querySelector('.slice').setAttribute('max', imageData1.getDimensions()[slicingMode] - 1);
+                            }
+                        };
+
+                        obj.resliceMapper.onModified(update);
+                        update();
+                        // window.addEventListener('resize', readyAll);
+                        // readyAll();
+                        // initializeHandle(obj.paintHandle);
+
+                        const reslice = obj.reslice;
+                        const viewType = xyzToViewType[i];
+
+                        viewAttributes.forEach((v)=>{
+                            v.widgetInstance.onInteractionEvent(
+                                ({ computeFocalPointOffset, canUpdateFocalPoint })=>{
+                                    console.log('333333')
+                                    const activeViewType = widgets.widget.getWidgetState().getActiveViewType();
+                                    const keepFocalPointPosition = activeViewType !== viewType && canUpdateFocalPoint;
+                                    updateReslice({
+                                        viewType,
+                                        reslice,
+                                        actor: obj.resliceActor,
+                                        renderer: obj.renderer,
+                                        resetFocalPoint: false,
+                                        keepFocalPointPosition,
+                                        computeFocalPointOffset,
+                                        sphereSources: obj.sphereSources,
+                                    });
+                                }
+                            );
+                            v.paintHandle.onStartInteractionEvent(() => {
+                                console.log('111111')
+                                obj.painter.startStroke();
+                                obj.painter.addPoint(widgets.paintWidget.getWidgetState().getTrueOrigin());
+                            });
+                            v.paintHandle.onInteractionEvent(() => {
+                                console.log('222222')
+                                obj.painter.addPoint(widgets.paintWidget.getWidgetState().getTrueOrigin());
+
+                            });
+                            v.paintHandle.onEndInteractionEvent(() => {
+                                console.log('444444')
+                                obj.painter.endStroke();
+                            });
+
+                        });
+
+                        updateReslice({
+                            viewType,
+                            reslice,
+                            actor: obj.resliceActor,
+                            renderer: obj.renderer,
+                            resetFocalPoint: true,
+                            keepFocalPointPosition: false,
+                            computeFocalPointOffset: true,
+                            sphereSources: obj.sphereSources,
+                        });
+                        // function initializeHandle(handle) {
+                        //     handle.onStartInteractionEvent(() => {
+                        //         obj.painter.startStroke();
+                        //     });
+                        //     handle.onEndInteractionEvent(() => {
+                        //         obj.painter.endStroke();
+                        //     });
+                        // }
+                        obj.renderWindow.render();
+
+                    });
+
+                    view3D.renderWindow.render();
+                    view3D.renderer.getActiveCamera().setPosition(0,-1,0);
+                    view3D.renderer.resetCamera();
+                    view3D.renderer.resetCameraClippingRange();
+                    function length(a) {
+                        let x = a[0];
+                        let y = a[1];
+                        let z = a[2];
+                        return Math.hypot(x, y, z);
+                    }
+
+                    const maxNumberOfSlices = length(imageData1.getDimensions());
+                    // document.getElementById('slabNumber').max = maxNumberOfSlices;
+
+                    function updateViews() {
+                        viewAttributes.forEach((obj, i) => {
+                            updateReslice({
+                                viewType: xyzToViewType[i],
+                                reslice: obj.reslice,
+                                actor: obj.resliceActor,
+                                renderer: obj.renderer,
+                                resetFocalPoint: true,
+                                keepFocalPointPosition: false,
+                                computeFocalPointOffset: true,
+                                sphereSources: obj.sphereSources,
+                                resetViewUp: true,
+                            });
+                            obj.renderWindow.render();
+                        });
+
+                    }
+                    function update3DView(i1,i2,i3) {
+
+                        let ss = $("input[name='model']:checked").val();
+                        let factor = 0;
+                        factor = (100 - i1)*1.0/100;
+                        view3D.m_CurWindow = factor * 5300 ;
+                        factor = (100 - i2)*1.0/100;
+                        view3D.m_CurLevel = (factor-1) * 5300 * 0.5 + 600 ;
+                        factor = i3 * 1.0/100;
+                        view3D.m_CurOpacity = factor * 1.0 ;
+                        view3D.ctfun.removeAllPoints();
+                        view3D.ofun.removeAllPoints();
+
+                        view3D.min_level = view3D.m_CurLevel - view3D.m_CurWindow / 2;
+                        console.log(view3D.m_CurWindow)
+                        console.log(view3D.m_CurLevel)
+                        console.log(view3D.m_CurOpacity)
+                        console.log(view3D.min_level)
+
+                        switch (ss) {
+                            case 'Teeth':
+                                teeth(view3D.m_CurWindow,view3D.m_CurLevel,view3D.m_CurOpacity,view3D.min_level);
+                                break;
+                            case 'Bone':
+                                bone(view3D.m_CurWindow,view3D.m_CurLevel,view3D.m_CurOpacity,view3D.min_level);
+                                break;
+                            case 'Gray':
+                                gray(view3D.m_CurWindow,view3D.m_CurLevel,view3D.m_CurOpacity,view3D.min_level);
+                                break;
+                            case 'Tissu':
+                                tissu(view3D.m_CurWindow,view3D.m_CurLevel,view3D.m_CurOpacity,view3D.min_level);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        function teeth(m_CurWindow,m_CurLevel,m_CurOpacity,min_level){
+                            view3D.ctfun.addRGBSegment(min_level, 0.0, 0, 0, min_level + 0.1301 * m_CurWindow, 0, 0, 0);
+                            view3D.ctfun.addRGBSegment(min_level + 0.1301 * m_CurWindow, 0, 0, 0, min_level + 0.4151 * m_CurWindow, 0.6, 0, 0);
+                            view3D.ctfun.addRGBSegment(min_level + 0.4151 * m_CurWindow, 0.6, 0, 0, min_level + 0.7283 * m_CurWindow, 0.8588, 0.6667, 0.298);
+                            view3D.ctfun.addRGBSegment(min_level + 0.7283 * m_CurWindow, 0.8588, 0.6667, 0.320, min_level + 0.9566 * m_CurWindow, 1, 1, 1);
+                            view3D.ctfun.addRGBSegment(min_level + 0.9566 * m_CurWindow, 1, 1, 1, min_level + m_CurWindow, 1, 1, 1);
+                            view3D.ofun.addSegment(min_level, 0, min_level + m_CurWindow, m_CurOpacity);
+                            view3D.ofun.addSegment(min_level, 0, min_level + 0.4660 * m_CurWindow, 0);
+                            view3D.ofun.addSegment(min_level + 0.4660 * m_CurWindow, 0, min_level + 0.7019 * m_CurWindow, 0.28 * m_CurOpacity);
+                            view3D.ofun.addSegment(min_level + 0.7019 * m_CurWindow, 0.28 * m_CurOpacity, min_level + 1 * m_CurWindow, 0.5* m_CurOpacity);
+                            view3D.property.setShade(0);
+
+
+                        }
+                        function bone(m_CurWindow,m_CurLevel,m_CurOpacity,min_level){
+                            view3D.ctfun.addRGBSegment(min_level, 0, 0, 0, min_level + 0.1301 * m_CurWindow, 0, 0, 0);
+                            view3D.ctfun.addRGBSegment(min_level + 0.1301 * m_CurWindow, 0, 0, 0, min_level + 0.4943 * m_CurWindow, 0.6275, 0.0980, 0.0863);
+                            view3D.ctfun.addRGBSegment(min_level + 0.4943 * m_CurWindow, 0.6275, 0.0980, 0.0863, min_level + 0.6075 * m_CurWindow, 0.9882, 0.8863, 0.5765);
+                            view3D.ctfun.addRGBSegment(min_level + 0.6075 * m_CurWindow, 0.9882, 0.8863, 0.5765, min_level + 0.6849 * m_CurWindow, 1, 1, 1);
+                            view3D.ctfun.addRGBSegment(min_level + 0.6849 * m_CurWindow, 1, 1, 1, min_level + m_CurWindow, 1, 1, 1);
+
+                            view3D.ofun.addSegment(min_level, 0, min_level + m_CurWindow * 0.4717, 0);
+                            view3D.ofun.addSegment(min_level + m_CurWindow * 0.4717, 0, min_level + m_CurWindow * 0.6038, 1 * m_CurOpacity);
+                            view3D.ofun.addSegment(min_level + m_CurWindow * 0.6038, 1 * m_CurOpacity, min_level + m_CurWindow, 1 * m_CurOpacity);
+                            view3D.mapper.setBlendModeToComposite();
+                            view3D.property.setShade(false);
+                            view3D.property.setAmbient(0.1);
+                            view3D.property.setDiffuse(0.8);
+                            view3D.property.setSpecular(0);
+                        }
+                        function gray(m_CurWindow,m_CurLevel,m_CurOpacity,min_level){
+                            view3D.ctfun.addRGBSegment(min_level, 0, 0, 0, min_level + m_CurWindow * 0.1302, 0, 0, 0);
+                            view3D.ctfun.addRGBSegment(min_level + m_CurWindow * 0.1302, 0, 0, 0, min_level + m_CurWindow * 0.6510, 1, 1, 1);
+                            view3D.ctfun.addRGBSegment(min_level + m_CurWindow * 0.6510, 1, 1, 1, min_level + m_CurWindow, 1, 1, 1);
+
+                            view3D.ofun.addSegment(min_level, 0, min_level + m_CurWindow * 0.1472, 0);
+                            view3D.ofun.addSegment(min_level + m_CurWindow * 0.1472, 0, min_level + m_CurWindow * 0.3019, 0.2* m_CurOpacity);
+                            view3D.ofun.addSegment(min_level + m_CurWindow * 0.3019, 0.2* m_CurOpacity, min_level + m_CurWindow * 0.4774, 0.3* m_CurOpacity);
+                            view3D.ofun.addSegment(min_level + m_CurWindow * 0.4774, 0.3* m_CurOpacity, min_level + m_CurWindow * 0.6698, 0.5* m_CurOpacity);
+                            view3D.ofun.addSegment(min_level + m_CurWindow * 0.6698, 0.5* m_CurOpacity, min_level + m_CurWindow, 1.0* m_CurOpacity);
+                            view3D.property.setShade(true);
+                        }
+                        function tissu(m_CurWindow,m_CurLevel,m_CurOpacity,min_level){
+                            view3D.ctfun.addRGBSegment(min_level, 0, 0, 0, min_level + m_CurWindow * 0.2034, 0.7294, 0.2510, 0.2980);
+                            view3D.ctfun.addRGBSegment(min_level + m_CurWindow * 0.2034, 0.7294, 0.2510, 0.2980, min_level + m_CurWindow * 0.4057, 0.8980, 0.8, 0.6);
+                            view3D.ctfun.addRGBSegment(min_level + m_CurWindow * 0.4057, 0.8980, 0.8, 0.6, min_level + m_CurWindow * 0.7547, 1, 1, 1);
+                            view3D.ctfun.addRGBSegment(min_level + m_CurWindow * 0.7547, 1, 1, 1, min_level + m_CurWindow, 1, 1, 1);
+
+                            view3D.ofun.addSegment(min_level, 0, min_level + m_CurWindow *0.2549, 0.3* m_CurOpacity);
+                            view3D.ofun.addSegment(min_level, 0, min_level + m_CurWindow *0.5091, 0.3* m_CurOpacity);
+                            view3D.ofun.addSegment(min_level + m_CurWindow *0.5091, 0.3* m_CurOpacity, min_level + m_CurWindow * 0.7546, 1 * m_CurOpacity);
+                            view3D.ofun.addSegment(min_level + m_CurWindow *0.7546, 1, min_level + m_CurWindow, 1);
+                            view3D.property.setShade(true);
+                            view3D.property.setDiffuse(0);
+                            view3D.property.setSpecular(0);
+                        }
+
+                        view3D.property.setRGBTransferFunction(0, view3D.ctfun);
+                        view3D.property.setScalarOpacity(0, view3D.ofun);
+                        view3D.property.setInterpolationTypeToLinear();
+                        // view3D.property.setScalarOpacityUnitDistance(0, 4.5);
+
+                        view3D.actor.setProperty(view3D.property);
+                        view3D.actor.setMapper(view3D.mapper);
+
+                        view3D.renderer.addActor(view3D.actor);
+                        view3D.renderWindow.render();
+                        // view3D.renderer.getActiveCamera().setPosition(0,-1,0);
+                        // view3D.renderer.resetCamera();
+                        // view3D.renderer.resetCameraClippingRange();
+                    }
+
+
+                    const checkboxOrthogonality = document.getElementById('checkboxOrthogality');
+                    checkboxOrthogonality.addEventListener('change', (ev) => {
+                        widgetState.setKeepOrthogonality(checkboxOrthogonality.checked);
+                    });
+
+                    const checkboxRotation = document.getElementById('checkboxRotation');
+                    checkboxRotation.addEventListener('change', (ev) => {
+                        widgetState.setEnableRotation(checkboxRotation.checked);
+                    });
+
+                    const checkboxTranslation = document.getElementById('checkboxTranslation');
+                    checkboxTranslation.addEventListener('change', (ev) => {
+                        widgetState.setEnableTranslation(checkboxTranslation.checked);
+                    });
+
+                    const checkboxScaleInPixels = document.getElementById('checkboxScaleInPixels');
+                    checkboxScaleInPixels.addEventListener('change', (ev) => {
+                        viewAttributes.forEach((obj) => {
+                            obj.widgetInstance.setScaleInPixels(checkboxScaleInPixels.checked);
+                            obj.interactor.render();
+                        });
+                    });
+
+                    // const sliderSlabNumberofSlices = document.getElementById('slabNumber');
+                    // sliderSlabNumberofSlices.addEventListener('change',(ev) => {
+                    //     const trSlabNumberValue = document.getElementById('slabNumberValue');
+                    //     trSlabNumberValue.innerHTML = ev.target.value;
+                    //     viewAttributes.forEach((obj) => {
+                    //         obj.reslice.setSlabNumberOfSlices(ev.target.value);
+                    //     });
+                    //     updateViews();
+                    // });
+
+                    // let o1 = document.getElementById('slabNumber1');
+                    // let o2 = document.getElementById('slabNumber2');
+                    // let o3 = document.getElementById('slabNumber3');
+                    //
+                    // document.getElementById('slabNumber1').addEventListener('input',(event) => {
+                    //     document.getElementById('slabNumber1').innerHTML = event.target.value;
+                    //     update3DView(event.target.value,o2.value,o3.value);
+                    // },false);
+
+                    $('#slabNumber1').bind('input propertychange',function (event) {
+                        $('#slabNumberValue1').html(event.target.value);
+                        update3DView(event.target.value,$('#slabNumber2').val(),$('#slabNumber3').val());
+                    });
+                    $('#slabNumber2').bind('input propertychange',function (event) {
+                        $('#slabNumberValue2').html(event.target.value);
+                        update3DView($('#slabNumber1').val(),event.target.value,$('#slabNumber3').val());
+                    });
+                    $('#slabNumber3').bind('input propertychange',function (event) {
+                        $('#slabNumberValue3').html(event.target.value);
+                        update3DView($('#slabNumber1').val(),$('#slabNumber2').val(),event.target.value);
+                    });
+                    $("input[name='model']").bind('input propertychange',function (event) {
+                        update3DView($('#slabNumber1').val(),$('#slabNumber2').val(),$('#slabNumber3').val());
+                    })
+
+                    const buttonReset = document.getElementById('buttonReset');
+                    buttonReset.addEventListener('click', () => {
+                        console.log('11111')
+                        widgetState.setPlanes({ ...initialPlanesState });
+                        widgets.widget.setCenter(widgets.widget.getWidgetState().getImage().getCenter());
+                        updateViews();
+
+                        $('#slabNumber1').prop('value',0)
+                        // $('#slabNumber1').attr('html',0)
+                        $('#slabNumberValue1').html('0');
+                        $('#slabNumber2').prop('value','0')
+                        $('#slabNumberValue2').html('0');
+                        $('#slabNumber3').prop('value',100)
+                        $('#slabNumberValue3').html('100');
+                        update3DView($('#slabNumber1').val(),$('#slabNumber2').val(),$('#slabNumber3').val());
+
+                    });
+                     $('#htmleaf').hide();
+                     $('.mpr').css('visibility','visible');
+                     // clearTimeout(st);
+                })
+            }).catch((e)=>{});
+        }).catch(function (error) {
+            console.log(error);
+        });
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Open Health Imaging Foundation DICOM Viewer" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="theme-color" content="#000000" />
+    <meta http-equiv="cleartype" content="on" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link href="https://fonts.googleapis.com/css?family=Sanchez" rel="stylesheet" />
+
+    <title>OHIF Standalone Viewer</title>
+    <style type="text/css">
+        body { background-color: #333333; text-align: center; color: #808080; font-weight: bold; }
+    </style>
+
+
+
+
+</head>
+
+<body>
+<noscript> You need to enable JavaScript to run this app. </noscript>
+
+<!--<div id="demo-element" class="slider"></div>-->
+<div id="root"></div>
+
+<!--<script type="text/javascript" src="https://unpkg.com/@ohif/viewer@4.11.1/dist/index.umd.js" crossorigin></script>-->
+<!--<script type="text/javascript" th:src="@{/js/ohif/ohif-viewer.js}" crossorigin></script>-->
+<!--<script type="text/javascript" src="https://unpkg.com/vtk.js@19.2.12/vtk.js"></script>-->
+<!--<script type="text/javascript" src="https://unpkg.com/itk@14.1.1/umd/itk.js"></script>-->
+<!--<script type="text/javascript" th:src="@{/js/dcm/vtk.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/js/dcm/axios.min.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/js/jquery/jquery.min.js}"></script>-->
+<script type="text/javascript" src="https://unpkg.com/@ohif/viewer@1.0.3/dist/index.umd.js"></script>
+<script>
+
+
+    var containerId = 'root';
+    var componentRenderedOrUpdatedCallback = function() {
+        console.log('OHIF Viewer rendered/updated');
+    };
+
+    window.OHIFViewer.installViewer(
+        {
+            servers: {
+                dicomWeb: [
+                    // {
+                    //     name: 'DCM4CHEE',
+                    //     wadoUriRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/wado',
+                    //     qidoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
+                    //     wadoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
+                    //     qidoSupportsIncludeField: true,
+                    //     imageRendering: 'wadors',
+                    //     thumbnailRendering: 'wadors',
+                    // },
+                ],
+            },
+        }, containerId,componentRenderedOrUpdatedCallback
+    );
+
+
+    // const testSeriesDirectory = 'http://wcb:8090/bondent/header/'
+    // const path = 'D:/DICOM/CTimage/dicomVR'
+    // // const path = 'D:/rj'
+    // const fileNames = ['1374.dcm', '999.999.133.1996.1.1800.1.6.25.dcm', '20210714095734261.dcm']
+    //
+    //
+    // const data = axios.get('http://wcb:8090/bondent/receive/files/',{
+    //     params:{}
+    // })
+    // .then(function (response) {
+    //     const data = response.data;
+    //     const fetchFiles = data.map(function (file) {
+    //         const path = testSeriesDirectory + file;
+    //         // console.log(path)
+    //         const axiosget = axios.get(path,{responseType:'blob'}).catch(error => {
+    //             console.log('axios get error');
+    //             console.log(error)
+    //         });
+    //         // console.log(axiosget)
+    //         return axiosget.then(function (response) {
+    //             const jsFile = new window.File([response.data],file)
+    //             console.log(jsFile)
+    //             return jsFile
+    //         })
+    //         .catch(error => {
+    //             console.log('axios get then error');
+    //             console.log(error)
+    //         })
+    //     })
+    //
+    //     Promise.all(fetchFiles).then((files)=>{
+    //         console.log(fetchFiles)
+    //         console.log(files)
+    //         itk.readImageDICOMFileSeries(files).then(({ webWorker , image}) => {
+    //
+    //             console.log(files)
+    //             console.log(image)
+    //             console.log(image.imageType.dimension)
+    //             const imageData = vtk.Common.DataModel.vtkITKHelper.convertItkToVtkImage(image);
+    //
+    //
+    //
+    //             const cone = vtk.Filters.Sources.vtkConeSource.newInstance();
+    //             const actor = vtk.Rendering.Core.vtkVolume.newInstance();
+    //             const mapper = vtk.Rendering.Core.vtkVolumeMapper.newInstance();
+    //             const property = vtk.Rendering.Core.vtkVolumeProperty.newInstance();
+    //             const view3d = document.getElementById("demo-element");
+    //             const fullScreenRenderer = vtk.Rendering.Misc.vtkFullScreenRenderWindow.newInstance({
+    //                 rootContainer : view3d,
+    //                 containerStyle:{
+    //                     height:'100%',
+    //                     overflow:'hidden',
+    //                 },
+    //                 background:[0,0,0],
+    //             });
+    //             const renderer = fullScreenRenderer.getRenderer();
+    //             const renderWindow = fullScreenRenderer.getRenderWindow();
+    //             renderWindow.getInteractor().setDesiredUpdateRate(15);
+    //
+    //             const source = imageData;
+    //
+    //             // create color and opacity transfer functions
+    //             const ctfun = vtk.Rendering.Core.vtkColorTransferFunction.newInstance();
+    //             // ctfun.addRGBPoint(200.0, 1.0, 1.0, 1.0);
+    //             // ctfun.addRGBPoint(2000.0, 0.0, 0.0, 0.0);
+    //             ctfun.addRGBPointLong(-3024, 0, 0, 0, 0.5, 0.0);
+    //             ctfun.addRGBPointLong(-16, 0.73, 0.25, 0.30, 0.49, 0.61);
+    //             ctfun.addRGBPointLong(641, 0.90, 0.82, 0.56, 0.5, 0.0);
+    //             ctfun.addRGBPointLong(3071, 1, 1, 1, 0.5, 0.0);
+    //
+    //             const ofun = vtk.Common.DataModel.vtkPiecewiseFunction.newInstance();
+    //             ofun.addPoint(-3024, 0);
+    //             ofun.addPoint(600, 0);
+    //             ofun.addPoint(1241, 0.81);
+    //             ofun.addPoint(3071, 0.81);
+    //
+    //             // set them on the property
+    //             property.setRGBTransferFunction(0, ctfun);
+    //             property.setScalarOpacity(0, ofun);
+    //             property.setScalarOpacityUnitDistance(0, 4.5);
+    //             property.setInterpolationTypeToLinear();
+    //             actor.setProperty(property);
+    //
+    //             // Pipeline handling
+    //             actor.setMapper(mapper);
+    //             mapper.setInputData(source);
+    //             // mapper.setSampleDistance(0.7);
+    //
+    //             const sampleDistance =
+    //                 0.7 *
+    //                 Math.sqrt(
+    //                     source
+    //                         .getSpacing()
+    //                         .map((v) => v * v)
+    //                         .reduce((a, b) => a + b, 0),
+    //                 );
+    //             mapper.setSampleDistance(sampleDistance);
+    //
+    //             renderer.addActor(actor);
+    //
+    //             // const lookupTable = vtkColorTransferFunction.newInstance();
+    //             // const piecewiseFunction = vtkPiecewiseFunction.newInstance();
+    //
+    //             // create color and opacity transfer functions
+    //             // 加了UI之后 这里的设置其实可以删除
+    //             // lookupTable.addRGBPoint(200.0, 0.4, 0.2, 0.0);
+    //             // lookupTable.addRGBPoint(2000.0, 1.0, 1.0, 1.0);
+    //             //
+    //             // piecewiseFunction.addPoint(200.0, 0.0);
+    //             // piecewiseFunction.addPoint(1200.0, 0.5);
+    //             // piecewiseFunction.addPoint(3000.0, 0.8);
+    //             //
+    //             // actor.getProperty().setRGBTransferFunction(0, lookupTable);
+    //             // actor.getProperty().setScalarOpacity(0, piecewiseFunction);
+    //             //
+    //             // actor.getProperty().setScalarOpacityUnitDistance(0, 4.5);
+    //             // actor.getProperty().setInterpolationTypeToLinear();
+    //             // actor.getProperty().setUseGradientOpacity(0, 1);
+    //             // actor.getProperty().setGradientOpacityMinimumValue(0, 15);
+    //             // actor.getProperty().setGradientOpacityMinimumOpacity(0, 0.0);
+    //             // actor.getProperty().setGradientOpacityMaximumValue(0, 100);
+    //             // actor.getProperty().setGradientOpacityMaximumOpacity(0, 1.0);
+    //             // actor.getProperty().setShade(1);
+    //             // actor.getProperty().setAmbient(0.2);
+    //             // actor.getProperty().setDiffuse(0.7);
+    //             // actor.getProperty().setSpecular(0.3);
+    //             // actor.getProperty().setSpecularPower(8.0);
+    //
+    //             // Control UI
+    //             const controllerWidget = vtk.Interaction.UI.vtkVolumeController.newInstance({
+    //                 size: [400, 150],
+    //                 rescaleColorMap: true,
+    //             });
+    //             controllerWidget.setContainer(view3d);
+    //             controllerWidget.setupContent(renderWindow, actor, true);
+    //
+    //             fullScreenRenderer.setResizeCallback(({ width, height }) => {
+    //                 // 2px padding + 2x1px boder + 5px edge = 14
+    //                 if (width > 414) {
+    //                     controllerWidget.setSize(400, 150);
+    //                 } else {
+    //                     controllerWidget.setSize(width - 14, 150);
+    //                 }
+    //                 controllerWidget.render();
+    //                 // fpsMonitor.update();
+    //             });
+    //
+    //             // First render
+    //             renderer.resetCamera();
+    //             renderWindow.render();
+    //
+    //         })
+    //     })
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+    // })
+
+
+</script>
+
+
+
+
+</body>
+</html>

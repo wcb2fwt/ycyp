@@ -1,0 +1,107 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1309150",
+      "name": "工具,写,编辑,钢笔,铅笔,设备,写作,线性,扁平,填充,单色,简约,圆润",
+      "font_class": "24",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "3405321",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e6e5",
+      "unicode_decimal": 59109
+    },
+    {
+      "icon_id": "4970627",
+      "name": "复位",
+      "font_class": "fuwei",
+      "unicode": "ea6e",
+      "unicode_decimal": 60014
+    },
+    {
+      "icon_id": "6491369",
+      "name": "降噪-o",
+      "font_class": "jiangzao-o",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "6677524",
+      "name": "面积测量",
+      "font_class": "mianjiceliang",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "9407799",
+      "name": "角度",
+      "font_class": "jiaodu",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "11399556",
+      "name": "注释",
+      "font_class": "zhushi",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "11532919",
+      "name": "折线",
+      "font_class": "zhexian",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "12796456",
+      "name": "113锐化",
+      "font_class": "ruihua",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "17605472",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e816",
+      "unicode_decimal": 59414
+    },
+    {
+      "icon_id": "26028381",
+      "name": "放大缩小",
+      "font_class": "fangdasuoxiao",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "26955954",
+      "name": "卷尺_line",
+      "font_class": "juanchi_line",
+      "unicode": "ef05",
+      "unicode_decimal": 61189
+    },
+    {
+      "icon_id": "26955993",
+      "name": "直尺_line",
+      "font_class": "zhichi_line",
+      "unicode": "ef06",
+      "unicode_decimal": 61190
+    },
+    {
+      "icon_id": "27066669",
+      "name": "医疗_骨科_骨头_骨折",
+      "font_class": "yiliao_guke_gutou_guzhe",
+      "unicode": "e847",
+      "unicode_decimal": 59463
+    }
+  ]
+}

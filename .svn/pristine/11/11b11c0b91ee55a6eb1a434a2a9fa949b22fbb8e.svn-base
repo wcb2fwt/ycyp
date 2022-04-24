@@ -1,0 +1,17 @@
+.mmGrid,
+.mmPaginator{
+    font-size: 12px;
+}
+.btnPrice {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 0px auto;
+    background: url(img/botton_g1.gif) no-repeat;
+}
+
+.btnPrice:hover {
+    background: url(img/botton_g2.gif) no-repeat;
+}
+
+

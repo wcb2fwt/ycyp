@@ -1,0 +1,354 @@
+package com.bonzd.dicom.controller;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.bonzd.dicom.annotation.LoginRequired;
+import com.bonzd.dicom.dao.InstanceDao;
+import com.bonzd.dicom.dao.PatientDao;
+import com.bonzd.dicom.dao.SeriesDao;
+import com.bonzd.dicom.dao.StudyDao;
+import com.bonzd.dicom.entity.Instance;
+import com.bonzd.dicom.entity.Patient;
+import com.bonzd.dicom.entity.Series;
+import com.bonzd.dicom.entity.Study;
+import com.bonzd.dicom.util.Dcm2Jpg;
+import com.bonzd.dicom.util.HostHolder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.*;
+
+@Controller
+@RequestMapping("/bonzd")
+public class DicomController {
+
+    private static final String JPG_EXT = ".jpg";
+
+    @Value("${pacs.storage.image}")
+    private String pacsImageStoragePath;
+
+    @Value("${pacs.storage.dcm}")
+    private String pacsDcmStoragePath;
+
+    @Autowired
+    PatientDao patientDao;
+
+    @Autowired
+    StudyDao studyDao;
+
+    @Autowired
+    SeriesDao seriesDao;
+
+    @Autowired
+    InstanceDao instanceDao;
+
+    @Autowired
+    HostHolder hostHolder;
+
+    private static final Logger LOG = LoggerFactory.getLogger(DicomController.class);
+
+    @LoginRequired
+    @RequestMapping(value = "/patient", method = RequestMethod.GET)
+    public String patient(@RequestParam(defaultValue="1", value="page", required=false) Integer page,
+                          @RequestParam(defaultValue="10", value="size", required=false) Integer size,
+                          @RequestParam(defaultValue="0", value="pkTBLPatientID", required=false) Long pkTBLPatientID,
+                          @RequestParam(defaultValue="0", value="pkTBLStudyID", required=false) Long pkTBLStudyID,
+                          @RequestParam(defaultValue="0", value="pkTBLSeriesID", required=false) Long pkTBLSeriesID,
+                          Model model){
+        LOG.debug("patient()");
+        int firstResult = (page==null)?0:(page-1) * size;
+        String number = hostHolder.getUser().getDeviceSerialNumber();
+        List<Patient> patients = patientDao.findByNumber(number);
+        model.addAttribute("patients", patients);
+        return "site/patient";
+    }
+
+    @LoginRequired
+    @RequestMapping(value = "/patient1", method = RequestMethod.GET)
+    @ResponseBody
+    public Map patient1(Integer page,Integer limit,String name){
+        System.out.println("page"+page);
+        System.out.println("limit"+limit);
+        System.out.println("name"+name);
+        String number = null;
+        List<Patient> patients;
+        List<Patient> patients1;
+        if(hostHolder.getUser() != null){
+            number = hostHolder.getUser().getDeviceSerialNumber();
+        }
+        if(name!=null&&!"".equals(name)){
+            patients = patientDao.findByNumber(page,limit,number,name);
+            patients1 = patientDao.findByNumber(number,name);
+        }else {
+            patients = patientDao.findByNumber(page,limit,number);
+            patients1 = patientDao.findByNumber(number);
+        }
+        int seIndex= patients1.size();
+        Map map = new HashMap();
+        map.put("items",patients);
+        map.put("totalCount",seIndex);
+        return map;
+    }
+
+    @RequestMapping(value = "/study_table/{pkTBLPatientID}", method = RequestMethod.GET)
+    @ResponseBody
+    public Map studyTable(@PathVariable Long pkTBLPatientID){
+        List<Study> studyList = studyDao.findByPkTBLPatientID(pkTBLPatientID);
+        List list = new ArrayList();
+        Map map = new HashMap();
+        for (Study study : studyList) {
+            list.add(study);
+        }
+        map.put("items",list);
+        map.put("totalCount",list.size());
+
+        return map;
+    }
+
+    @RequestMapping(value = "/series_table/{pkTBLStudyID}",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String,Object> seriesTable(@PathVariable Long pkTBLStudyID){
+        System.out.println("pkTBLStudyID"+pkTBLStudyID);
+//        List<Series> seriesList = seriesDao.findByPkTBLStudyID(pkTBLStudyID);
+        List<Series> seriesList = seriesDao.findAllByPkTBLPatientID(pkTBLStudyID);
+        Map<String,Object> map = new HashMap();
+
+        map.put("items",seriesList);
+        System.out.println(map);
+        return map;
+    }
+
+    @RequestMapping(value = "/insert_table/{pkTBLSeriesID}",method = RequestMethod.GET)
+    public String insertTable(@PathVariable Long pkTBLSeriesID, Model model){
+        System.out.println(pkTBLSeriesID);
+        List<Instance> instanceList = instanceDao.findByPkTBLSeriesID(pkTBLSeriesID);
+        List<Map<String ,Object>> instances = new ArrayList();
+        for (Instance instance : instanceList) {
+            Map<String,Object> map = new HashMap();
+            map.put("instance",instance);
+            instances.add(map);
+        }
+        System.out.println(instances);
+        model.addAttribute("instances",instances);
+        return "site/patient::scrollBar";
+    }
+
+    @RequestMapping(value = "/render/{pkTBLSeriesID}",method = RequestMethod.GET)
+    public String render(@PathVariable Long pkTBLSeriesID, Model model){
+        System.out.println("render");
+        System.out.println("pkTBLSeriesID"+pkTBLSeriesID);
+        List<String> stringList = instanceDao.findSopInstanceUIDByPkTBLSeriesID(pkTBLSeriesID);
+        System.out.println(stringList.size());
+        System.out.println(stringList);
+        System.out.println(JSON.toJSONString(stringList));
+        model.addAttribute("stringList",JSON.toJSONString(stringList));
+        model.addAttribute("pkTBLSeriesID",pkTBLSeriesID);
+        return "site/render";
+    }
+
+    @RequestMapping(value = "/files/{pkTBLSeriesID}",method = RequestMethod.GET)
+    @ResponseBody
+    public String files(@PathVariable Long pkTBLSeriesID, Model model){
+        List<String> stringList = instanceDao.findSopInstanceUIDByPkTBLSeriesID(pkTBLSeriesID);
+//        List<String> list = new ArrayList<>();
+//        for (String s : stringList) {
+//            list.add(s+".dcm");
+//        }
+//        System.out.println(stringList.size());
+//        System.out.println(stringList);
+//        System.out.println(JSON.toJSONString(list));
+        model.addAttribute("pkTBLSeriesID",pkTBLSeriesID);
+        return JSON.toJSONString(stringList);
+    }
+
+    @RequestMapping(value = "/details/{pkTBLInstanceID}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getImage(@PathVariable Long pkTBLInstanceID, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        File tempImage = null;
+        Instance instance = instanceDao.findById(pkTBLInstanceID);
+//		List<Instance> instanceList = instanceDao.findByPkTBLSeriesID(pkTBLInstanceID);
+//		if (instanceList.size() != 0){
+//			File dicomFile;
+//			Dcm2Jpg dcm2Jpg = null;
+//			for(int i=0;i<instanceList.size();i++){
+//				dicomFile = new File(pacsDcmStoragePath+"/"+instanceList.get(i).getMediaStorageSopInstanceUID()+".dcm");
+//				dcm2Jpg = new Dcm2Jpg();
+//				dcm2Jpg.initImageWriter("JPEG", "jpeg", "com.sun.imageio.plugins.*", null, null);
+//				String dicomPath = pacsDcmStoragePath + "/" + instanceList.get(i).getMediaStorageSopInstanceUID()+".dcm";
+//				String newfilename = FilenameUtils.removeExtension(dicomFile.getName()) + JPG_EXT;
+//				String imagePath = pacsImageStoragePath + "/" + newfilename;
+//				String[] strings = new String[]{dicomPath,imagePath};
+//				tempImage = new File(pacsImageStoragePath, newfilename); //create the temporary image file instance
+//				dcm2Jpg.main(strings);
+//				if(!tempImage.exists()) try {
+//					throw new Exception();
+//				} catch (Exception e) {
+//					LOG.error("failed convert {} to jpeg... Exception: {}", dicomFile, e.getMessage());
+//					e.printStackTrace();
+//				}
+//
+//			}
+//			final HttpHeaders headers = new HttpHeaders();
+//			headers.setContentType(MediaType.IMAGE_JPEG);
+//			if(tempImage != null){
+//				byte[] bytes = IOUtils.toByteArray( new FileInputStream(tempImage) ) ;
+//				return new ResponseEntity<byte[]> (bytes, headers, HttpStatus.CREATED);
+//			}
+//
+//		}
+        if(instance != null){
+            File dicomFile = new File(pacsDcmStoragePath + "/" + instance.getMediaStorageSopInstanceUID()+".dcm");
+            /********************************************************* TEMP IMAGE FILE CREATION *****************************************************************/
+            Dcm2Jpg dcm2Jpg = null;
+            try{
+                dcm2Jpg = new Dcm2Jpg();// Dcm2Jpg isn't thread safe (due to ImageIO), so need to create a new instance each thread...
+                dcm2Jpg.initImageWriter("JPEG", "jpeg", "com.sun.imageio.plugins.*", null, null); // default JPEG writer class, compressionType, and quality
+                String dicomPath = pacsDcmStoragePath + "/" + instance.getMediaStorageSopInstanceUID()+".dcm";
+                String newfilename = FilenameUtils.removeExtension(dicomFile.getName()) + JPG_EXT; //remove the .dcm and  assign a JPG extension
+                String imagePath = pacsImageStoragePath + "/" + newfilename;
+                String[] strings = new String[]{dicomPath,imagePath};
+//				dcm2Jpg.main(strings);
+                tempImage = new File(pacsImageStoragePath, newfilename); //create the temporary image file instance
+//	   			dcm2Jpg.convert(dicomFile, tempImage);//save the new jpeg into the .img temp folder
+                dcm2Jpg.main(strings);
+                if(!tempImage.exists())	throw new Exception(); //if not exists, throw exception to log and return back
+
+            }catch(Exception e){
+                LOG.error("failed convert {} to jpeg... Exception: {}", dicomFile, e.getMessage()); // shouldn't care...
+            }
+            /********************************************************** END OF TEMP FILE CREATION ***************************************************************/
+
+            final HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+
+            if(tempImage != null){
+                byte[] bytes = IOUtils.toByteArray( new FileInputStream(tempImage) ) ;
+                return new ResponseEntity<byte[]> (bytes, headers, HttpStatus.CREATED);
+            }
+
+        }
+
+        return null;
+    }
+
+
+    @RequestMapping(value = "/instances/{pkTBLInstanceID}", method = RequestMethod.GET)
+    public String instances(@PathVariable Long pkTBLInstanceID, Model model){
+        if (pkTBLInstanceID != null){
+            List<Study> studyList = studyDao.findByPkTBLPatientID(pkTBLInstanceID);
+            for (Study study : studyList) {
+                List<Series> seriesList = seriesDao.findByPkTBLStudyID(study.getPkTBLStudyID());
+                for (Series series : seriesList) {
+                    List<Instance> instanceList = instanceDao.findByPkTBLSeriesID(series.getPkTBLSeriesID());
+
+                    model.addAttribute("instanceList",instanceList);
+                }
+                model.addAttribute("series",seriesList);
+            }
+            model.addAttribute("studyList",studyList);
+
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/instances1/{pkTBLInstanceID}", method = RequestMethod.GET)
+    public String instances1(@PathVariable Long pkTBLInstanceID, Model model){
+        if (pkTBLInstanceID != null){
+            List<Study> studyList = studyDao.findByPkTBLPatientID(pkTBLInstanceID);
+            for (Study study : studyList) {
+                List<Series> seriesList = seriesDao.findByPkTBLStudyID(study.getPkTBLStudyID());
+                for (Series series : seriesList) {
+                    List<Instance> instanceList = instanceDao.findByPkTBLSeriesID(series.getPkTBLSeriesID());
+
+                    model.addAttribute("instanceList",instanceList);
+                }
+                model.addAttribute("series",seriesList);
+            }
+            model.addAttribute("studyList",studyList);
+
+        }
+        return null;
+    }
+
+    @RequestMapping(path = "files",method = RequestMethod.GET)
+    @ResponseBody
+    public String getFiles(String path1){
+        String path = "D:/DICOM/CTimage/dicomVR"; // 路径
+        File f = new File(path);
+        if (!f.exists()) {
+            System.out.println(path + " not exists");
+            return null;
+        }
+
+        File[] fa = f.listFiles();
+//        String[] files = new String[fa.length];
+        List list = new ArrayList();
+        for (int i = 0; i < fa.length; i++) {
+            File fs = fa[i];
+            if (fs.isDirectory()) {
+                System.out.println(fs.getName() + " [目录]");
+            } else {
+                list.add(fs.getName());
+                System.out.println(fs.getName());
+            }
+        }
+
+        return JSON.toJSONString(list);
+    }
+
+    //获取文件
+    //向浏览器响应文件
+    @RequestMapping(path = "/header/{filename}",method = RequestMethod.GET)
+    public void getHeader(@PathVariable("filename") String filename, HttpServletResponse response){
+
+        //服务器存放路径
+        filename = pacsDcmStoragePath + "/" + filename;
+        //文件的后缀
+        String suffix = filename.substring(filename.lastIndexOf("."));
+        //响应文件
+        response.setContentType("application/octet-stream"+suffix);
+        try (
+                //获取字节流，图片是二进制的，文件的输出流
+                OutputStream os = response.getOutputStream();
+                //创建文件的输入流
+                FileInputStream fis = new FileInputStream(filename);
+        ){
+            //声明一个缓冲区
+            byte[] buffer = new byte[1024];
+            int b = 0;
+            while ((b = fis.read(buffer)) != -1){
+                os.write(buffer,0,b);
+            }
+        } catch (IOException e) {
+//            LOGGER.error("读取头像失败："+e.getMessage());
+            System.out.println("获取文件失败"+e.getMessage());
+        }
+    }
+
+    @RequestMapping(path = "profile/{pkTBLUserID}",method = RequestMethod.GET)
+    public String getProfile1(@PathVariable Long pkTBLUserID){
+        System.out.println("pkTBLUserID"+pkTBLUserID);
+        return "site/profile";
+    }
+
+
+}

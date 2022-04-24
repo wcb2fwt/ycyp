@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" th:href="@{/img/favicon.html}">
+    <link rel="stylesheet" th:href="@{/css/cssLogin/swtx.css}">
+
+
+
+    <title>MPR</title>
+
+</head>
+
+<body>
+
+<div>
+    <table>
+        <tr>
+            <td>保持相互垂直:</td>
+            <td>
+                <input type="checkbox" id="checkboxOrthogality" checked>
+            </td>
+        </tr>
+        <tr>
+            <td>允许旋转:</td>
+            <td>
+                <input type="checkbox" id="checkboxRotation" checked>
+            </td>
+        </tr>
+        <tr>
+            <td>允许平移:</td>
+            <td>
+                <input type="checkbox" id="checkboxTranslation" checked>
+            </td>
+        </tr>
+        <tr>
+            <td>以像素为单位:</td>
+            <td>
+                <input type="checkbox" id="checkboxScaleInPixels" checked>
+            </td>
+        </tr>
+        <tr>
+            <td>Slab Mode :</td>
+            <td>
+                <select id="slabMode">
+                    <option id="slabModeMin">最小</option>
+                    <option id="slabModeMax">最大</option>
+                    <option id="slabModeMean" selected="selected">平均值</option>
+                    <option id="slabModeSum">全部</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Slab Number of Slices :</td>
+            <td><input id='slabNumber' type="range" min="1" max="100" step="1" value="1" style="width: 100px;"/></td>
+            <td id='slabNumberValue'>1</td>
+        </tr>
+        <tr>
+            <td>
+                <select class="widget">
+                    <option name="paintWidget" selected>paintWidget</option>
+                    <option name="rectangleWidget">rectangleWidget</option>
+                    <option name="ellipseWidget">ellipseWidget</option>
+                    <option name="circleWidget">circleWidget</option>
+                    <option name="splineWidget">splineWidget</option>
+                    <option name="polygonWidget">polygonWidget</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="buttonReset">重置图像:</button>
+                <button id="buttonReset1">测试按钮:</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<table>
+    <tr>
+        <td>Radius Scale</td>
+        <td>
+            <input class="radius" type="range" min="1" max="200" step="1" value="1">
+        </td>
+    </tr>
+    <tr>
+        <td>Slice #</td>
+        <td>
+            <input class="slice" type="range" min="0" max="0" step="1">
+        </td>
+    </tr>
+    <tr>
+        <td>Slice Axis</td>
+        <td>
+            <select class="axis">
+                <option name="I">I</option>
+                <option name="J">J</option>
+                <option name="K" selected>K</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select class="widget">
+                <option name="paintWidget" selected>paintWidget</option>
+                <option name="rectangleWidget">rectangleWidget</option>
+                <option name="ellipseWidget">ellipseWidget</option>
+                <option name="circleWidget">circleWidget</option>
+                <option name="splineWidget">splineWidget</option>
+                <option name="polygonWidget">polygonWidget</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button class="focus">Grab focus</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Undo/Redo</td>
+        <td>
+            <button class="undo">Undo</button>
+            <button class="redo">Redo</button>
+        </td>
+    </tr>
+</table>
+<div id="ff"></div>
+
+
+
+<script type="text/javascript" src="https://unpkg.com/vtk.js@20.4.1/vtk.js"></script>
+<script type="text/javascript" src="https://unpkg.com/itk@14.1.1/umd/itk.js"></script>
+<script type="text/javascript" th:src="@{/js/page/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/page/axios.min.js}"></script>
+
+<script>
+    const testSeriesDirectory = 'http://wcb:8085/dicom/bonzd/header/';
+    const data = axios.get('http://wcb:8085/dicom/bonzd/files/'+[[${pkTBLSeriesID}]],{
+        params:{}
+    })
+        .then(function (response) {
+            const fetchFiles = response.data.map(function (file) {
+                const path = testSeriesDirectory + file + '.dcm';
+                const axiosget = axios.get(path,{responseType:'blob'}).catch(error => {
+                    console.log('axios get error');
+                    console.log(error)
+                });
+                return axiosget.then(function (response) {
+                    const jsFile = new window.File([response.data],file)
+                    console.log(jsFile)
+                    return jsFile
+                }).catch(error => {
+                        console.log('axios get then error');
+                        console.log(error)
+                    });
+            });
+            const container = document.querySelector('body');
+            const resliceCursor = vtk.Interaction.Widgets.vtkResliceCursor.newInstance();
+            const widgetManager = vtk.Widgets.Core.vtkWidgetManager.newInstance();
+            const paintWidget = vtk.Widgets.Widgets3D.vtkPaintWidget.newInstance();
+            Promise.all(fetchFiles).then((files)=>{
+                itk.readImageDICOMFileSeries(files).then(({image}) => {
+                    const imageData = vtk.Common.DataModel.vtkITKHelper.convertItkToVtkImage(image);
+                    resliceCursor.setImage(imageData);
+                    const renderWindows = [];
+                    const renderers = [];
+                    const GLWindows = [];
+                    const interactors = [];
+                    const resliceCursorWidgets = [];
+                    const resliceCursorRepresentations = [];
+
+                    const table = document.createElement('table');
+                    table.setAttribute('id', 'table');
+                    container.appendChild(table);
+
+                    const tr1 = document.createElement('tr');
+                    tr1.setAttribute('id', 'line1');
+                    table.appendChild(tr1);
+
+                    const tr2 = document.createElement('tr');
+                    tr2.setAttribute('id', 'line2');
+                    table.appendChild(tr2);
+
+                    for (let j=0;j<3;++j){
+                        const element = document.createElement('td');
+                        if (j===2){
+                            tr2.appendChild(element);
+                        }else {
+                            tr1.appendChild(element);
+                        }
+
+                        renderWindows[j] = vtk.Rendering.Core.vtkRenderWindow.newInstance();
+                        renderers[j] = vtk.Rendering.Core.vtkRenderer.newInstance();
+                        renderers[j].getActiveCamera().setParallelProjection(true);
+                        renderWindows[j].addRenderer(renderers[j]);
+
+                        GLWindows[j] = renderWindows[j].newAPISpecificView();
+                        GLWindows[j].setContainer(element);
+                        renderWindows[j].addView(GLWindows[j]);
+
+                        interactors[j] = vtk.Rendering.Core.vtkRenderWindowInteractor.newInstance();
+                        interactors[j].setView(GLWindows[j]);
+                        interactors[j].initialize();
+                        interactors[j].bindEvents(element);
+
+                        renderWindows[j].setInteractor(interactors[j]);
+
+                        resliceCursorWidgets[j] = vtk.Interaction.Widgets.vtkResliceCursorWidget.newInstance();
+                        resliceCursorRepresentations[j] = vtk.Interaction.Widgets.vtkResliceCursorLineRepresentation.newInstance();
+                        resliceCursorWidgets[j].setWidgetRep(resliceCursorRepresentations[j]);
+                        resliceCursorRepresentations[j].getReslice().setInputData(imageData);
+                        resliceCursorRepresentations[j].getCursorAlgorithm().setResliceCursor(resliceCursor);
+                        resliceCursorWidgets[j].setInteractor(interactors[j]);
+
+                        widgetManager.setRenderer(renderers[j]);
+                        widgetManager.addWidget(paintWidget,2);
+                        widgetManager.grabFocus(paintWidget);
+                        const painter = vtk.Filters.General.vtkPaintFilter.newInstance();
+                        painter.setBackgroundImage(imageData);
+                        painter.setLabel(1);
+
+                    }
+                    resliceCursorRepresentations[0].getCursorAlgorithm().setReslicePlaneNormalToXAxis();
+                    resliceCursorRepresentations[1].getCursorAlgorithm().setReslicePlaneNormalToYAxis();
+                    resliceCursorRepresentations[2].getCursorAlgorithm().setReslicePlaneNormalToZAxis();
+
+                    for (let k=0;k<3;k++){
+                        resliceCursorWidgets[k].onInteractionEvent(()=>{
+                            resliceCursorWidgets[0].render();
+                            resliceCursorWidgets[1].render();
+                            resliceCursorWidgets[2].render();
+                        });
+                        resliceCursorWidgets[k].setEnabled(true);
+                        renderers[k].resetCamera();
+                        renderWindows[k].render();
+                    }
+                })
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+</script>
+
+
+
+</body>
+</html>

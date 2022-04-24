@@ -1,0 +1,329 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul,ol,li {
+	list-style: none;
+}
+html,body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: rgb(54, 83, 221);
+}
+.canvasBox {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50px;
+	bottom: 0;
+	margin: auto;
+	display: flex;
+	overflow: hidden;
+}
+.contro {
+	width: 180px;
+	height: 100%;
+    /*background: #07133d;*/
+    list-style: none;
+}
+.controFont {
+	width: 145px;
+	height: 50px;
+	margin: 15px;
+	margin-top: 40px;
+	background: lightseagreen;
+	border-radius: 15px;
+	font-size: 22px;
+	text-align: center;
+	line-height: 50px;
+	color: #fff;
+}
+.drawType {
+	width: 145px;
+	height: 50%;
+	background: #42caca;
+	margin: 15px;
+	border-radius: 15px 15px 0 0;
+	position: relative;
+}
+.controType {
+	width: 145px;
+	height: 31%;
+	margin: 15px;
+	background: lightseagreen;
+	border-radius: 0 0 15px 15px ;
+}
+.controType li{
+	width: 42px;
+	height: 42px;
+	position: relative;
+	float: left;
+	background: red;
+	margin-left: 5px;
+	margin-top: 10px;
+	border-radius: 10px;
+	background: #07133d;
+	border: 4px solid ;
+}
+.drawType li{
+	width: 42px;
+	height: 42px;
+	position: relative;
+	float: left;
+	background: red;
+	margin-left: 5px;
+	margin-top: 10px;
+	border-radius: 10px;
+	background: #07133d;
+	border: 4px solid ;
+	color: #666;
+}
+.drawType .drawTypeChoose {
+	border: 4px solid orange;
+	color: #fff;
+}
+.drawType .maskLi {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius:15px 15px 0 0;
+	background: rgba(225,225,225,.5);
+	display: none;
+}
+.drawType li .icon {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	text-align: center;
+	line-height: 40px;
+	font-size: 30px;
+	cursor: pointer;
+}
+.drawType li .iconAlert {
+	position: absolute;
+	right: -46px;
+	top: 10px;
+	width: 40px;
+	height: 25px;
+	background: rgba(225,225,225,.9);
+	z-index: 10;
+	border-radius: 0  5px 5px 0;
+	font-size: 14px;
+	text-align: center;
+	line-height: 25px;
+	color: orange;
+	display: none;
+}
+.drawType li .iconAlert::after {
+	content: "";
+	position: absolute;
+	left: -24px;
+	top: 0;
+	width:0;
+    height:0;
+    border-width:12px 12px;
+    border-style:solid;
+   	border-color:transparent rgba(225,225,225,.9) transparent transparent;/*透明 灰 透明 透明 */
+}
+.drawType .polygon_1 .iconAlert {
+	width: 100px;
+	height: 50px;
+	right: -100px;
+}
+.drawType .polygon_1 .iconAlert input {
+	width: 50px;
+}
+.drawType .font_box .iconAlert{
+	width: 100px;
+	height: 50px;
+	right: -100px;
+}
+.drawType .font_box .iconAlert input {
+	width: 50px;
+}
+.controType li {
+	cursor: pointer;
+}
+.controType li .icon {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: #666;
+	text-align: center;
+	line-height: 40px;
+	font-size: 30px;
+	cursor: pointer;
+}
+.controType li .iconAlert {
+	position: absolute;
+	right: -46px;
+	top: 10px;
+	width: 40px;
+	height: 25px;
+	background: rgba(225,225,225,.9);
+	z-index: 10;
+	border-radius: 0  5px 5px 0;
+	font-size: 14px;
+	text-align: center;
+	line-height: 25px;
+	color: orange;
+	display: none;
+}
+
+.controType li .iconAlert::after {
+	content: "";
+	position: absolute;
+	left: -24px;
+	top: 0;
+	width:0;
+    height:0;
+    border-width:12px 12px;
+    border-style:solid;
+   	border-color:transparent rgba(225,225,225,.9) transparent transparent;/*透明 灰 透明 透明 */
+}
+.canvasDraw {
+	flex: 1;
+	width: 100%;
+	height: 100%;
+	/*background: #7df6e3;*/
+	position: relative;
+}
+.myselfBox {
+	position: absolute;
+	z-index: 100;
+	width: 200px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #fff;
+	background: orange;
+	border-radius: 10px;
+	display: none;
+}
+.drawFont {
+	position: absolute;
+	left: 50px;
+	top: 50px;
+	min-width: 10px;
+	min-height: 20px;
+	display: flex;
+	justify-content: center;
+	border: 2px dashed orange;
+	z-index: 10;
+	box-sizing: border-box;
+	display: none;
+}
+.intoFont {
+	font-size: 14px;
+	opacity: 0;
+}
+.drawFont input {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: transparent;
+	border: none;
+	outline:none;
+	min-width: 10px;
+	width: 110%;
+	box-sizing: border-box;
+	padding: 2px;
+	font-size: 14px;
+}
+/*.drawFont::after {
+	position: absolute;
+	right: 2px;
+	content: "";
+	height: 100%;
+	width: 2px;
+	background: black;
+	animation: shake .8s infinite;
+}*/
+@keyframes shake {
+	0%{
+		opacity: 1;
+	}
+	0%{
+		opacity: 0;
+	}
+}
+canvas {
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	/*background: #7df6e3;*/
+	/*cursor: crosshair;*/
+}
+.strokeColor {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+.controType .strokeColorBox {
+	background: #fff;
+	border: 4px solid black;
+}
+.controType .strokeColorBox .icon {
+	color: black;
+}
+.backgroundColor {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+	opacity: 0;
+}
+.controType .fillBg {
+	border: 4px solid orange;
+}
+.controType .fillBg .icon {
+	color: #fff;
+}
+.weight {
+	width: 50px;
+	height: 20px;
+	color: orange;
+	text-align: center;
+	font-weight: bold;
+}
+.controType .weightBox .iconAlert {
+	position: absolute;
+	right: -90px;
+	top: -10px;
+	width: 100px;
+	height: 60px;
+}
+.controType .weightBox {
+	border: 4px solid orange;
+}
+.controType .weightBox .icon {
+	color: orange;
+	font-size: 14px;
+}
+.controType .drawOrmoveChoose {
+	border: 4px solid orange;
+}
+.controType .drawOrmoveChoose .icon {
+	color: #fff;
+}
+.downLoad {
+	width: 100%;
+	height: 100%;
+	/*background: red;*/
+	z-index: 10;
+	position: absolute;
+}
+.downImg {
+	position: absolute;
+	z-index: 10;
+	left: 0;
+	top: 0;
+}

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" th:href="@{/img/favicon.html}">
+    <link rel="stylesheet" th:href="@{/css/cssLogin/swtx.css}">
+    <title>MPR</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <td>Radius Scale</td>
+        <td>
+            <input class="radius" type="range" min="1" max="200" step="1" value="1">
+        </td>
+    </tr>
+    <tr>
+        <td>Slice #</td>
+        <td>
+            <input class="slice" type="range" min="0" max="0" step="1">
+        </td>
+    </tr>
+    <tr>
+        <td>Slice Axis</td>
+        <td>
+            <select class="axis">
+                <option name="I">I</option>
+                <option name="J">J</option>
+                <option name="K" selected>K</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select class="widget">
+                <option name="paintWidget" selected>paintWidget</option>
+                <option name="rectangleWidget">rectangleWidget</option>
+                <option name="ellipseWidget">ellipseWidget</option>
+                <option name="circleWidget">circleWidget</option>
+                <option name="splineWidget">splineWidget</option>
+                <option name="polygonWidget">polygonWidget</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button class="focus">Grab focus</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Undo/Redo</td>
+        <td>
+            <button class="undo">Undo</button>
+            <button class="redo">Redo</button>
+        </td>
+    </tr>
+</table>
+
+
+<script type="text/javascript" src="https://unpkg.com/vtk.js@20.4.1/vtk.js"></script>
+<script type="text/javascript" src="https://unpkg.com/itk@14.1.1/umd/itk.js"></script>
+<script type="text/javascript" th:src="@{/js/page/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/page/axios.min.js}"></script>
+
+<script>
+    const testSeriesDirectory = 'http://wcb:8085/dicom/bonzd/header/';
+    const data = axios.get('http://wcb:8085/dicom/bonzd/files/'+[[${pkTBLSeriesID}]],{
+        params:{}
+    })
+        .then(function (response) {
+            const fetchFiles = response.data.map(function (file) {
+                const path = testSeriesDirectory + file + '.dcm';
+                const axiosget = axios.get(path,{responseType:'blob'}).catch(error => {
+                    console.log('axios get error');
+                    console.log(error)
+                });
+                return axiosget.then(function (response) {
+                    const jsFile = new window.File([response.data],file)
+                    console.log(jsFile)
+                    return jsFile
+                }).catch(error => {
+                        console.log('axios get then error');
+                        console.log(error)
+                    });
+            });
+
+            const ViewTypes = {
+                DEFAULT: 0,
+                GEOMETRY: 1,
+                SLICE: 2,
+                VOLUME: 3,
+                YZ_PLANE: 4, // Sagittal
+                XZ_PLANE: 5, // Coronal
+                XY_PLANE: 6, // Axial
+            };
+
+            function setCamera(sliceMode, renderer, data) {
+                const ijk = [0, 0, 0];
+                const position = [0, 0, 0];
+                const focalPoint = [0, 0, 0];
+                data.indexToWorld(ijk, focalPoint);
+                ijk[sliceMode] = 1;
+                data.indexToWorld(ijk, position);
+                renderer.getActiveCamera().set({ focalPoint, position });
+                renderer.resetCamera();
+            }
+
+            function updateControlPanel(im, ds) {
+                const slicingMode = im.getSlicingMode();
+                const extent = ds.getExtent();
+                document.querySelector('.slice').setAttribute('min', extent[slicingMode * 2]);
+                document.querySelector('.slice').setAttribute('max', extent[slicingMode * 2 + 1]);
+            }
+            function ready(scope, picking = false) {
+                scope.renderer.resetCamera();
+                scope.fullScreenRenderer.resize();
+                if (picking) {
+                    scope.widgetManager.enablePicking();
+                } else {
+                    scope.widgetManager.disablePicking();
+                }
+            };
+            function readyAll() {
+                ready(scene, true);
+            };
+
+            const scene = {};
+            // Paint filter
+            const painter = vtk.Filters.General.vtkPaintFilter.newInstance();
+            // Widgets
+            const widgets = {};
+            const container = document.querySelector('body');
+
+            Promise.all(fetchFiles).then((files)=>{
+                itk.readImageDICOMFileSeries(files).then(({image}) => {
+                    const imageData = vtk.Common.DataModel.vtkITKHelper.convertItkToVtkImage(image);
+
+                    const element = document.createElement('div');
+                    element.setAttribute('class','view');
+                    element.style.width = '50%';
+                    element.style.height = '400px';
+                    element.style.display = 'inline-block';
+                    container.appendChild(element);
+
+                    // scene.fullScreenRenderer = vtk.Rendering.Misc.vtkFullScreenRenderWindow.newInstance({
+                    //     rootContainer: document.body,
+                    //     background: [0.1, 0.1, 0.1],
+                    // });
+
+                    scene.fullScreenRenderer = vtk.Rendering.Misc.vtkGenericRenderWindow.newInstance();
+                    scene.fullScreenRenderer.setContainer(element);
+                    scene.fullScreenRenderer.resize();
+
+                    scene.renderer = scene.fullScreenRenderer.getRenderer();
+                    scene.renderWindow = scene.fullScreenRenderer.getRenderWindow();
+                    scene.apiSpecificRenderWindow = scene.fullScreenRenderer
+                        .getInteractor()
+                        .getView();
+                    scene.camera = scene.renderer.getActiveCamera();
+
+                    // setup 2D view
+                    scene.camera.setParallelProjection(true);
+                    scene.iStyle = vtk.Interaction.Style.vtkInteractorStyleImage.newInstance();
+                    scene.iStyle.setInteractionMode('IMAGE_SLICING');
+                    scene.renderWindow.getInteractor().setInteractorStyle(scene.iStyle);
+                    // scene.fullScreenRenderer.addController(controlPanel);
+
+                    scene.widgetManager = vtk.Widgets.Core.vtkWidgetManager.newInstance();
+                    scene.widgetManager.setRenderer(scene.renderer);
+
+
+                    widgets.paintWidget = vtk.Widgets.Widgets3D.vtkPaintWidget.newInstance();
+                    scene.paintHandle = scene.widgetManager.addWidget(
+                        widgets.paintWidget,
+                        ViewTypes.SLICE
+                    );
+                    scene.widgetManager.grabFocus(widgets.paintWidget);
+                    let activeWidget = 'paintWidget';
+
+
+                    const image1 = {
+                        imageMapper: vtk.Rendering.Core.vtkImageMapper.newInstance(),
+                        actor: vtk.Rendering.Core.vtkImageSlice.newInstance(),
+                    };
+
+                    const labelMap = {
+                        imageMapper: vtk.Rendering.Core.vtkImageMapper.newInstance(),
+                        actor: vtk.Rendering.Core.vtkImageSlice.newInstance(),
+                        cfun: vtk.Rendering.Core.vtkColorTransferFunction.newInstance(),
+                        ofun: vtk.Common.DataModel.vtkPiecewiseFunction.newInstance(),
+                    };
+                    image1.actor.setMapper(image1.imageMapper);
+
+
+                    labelMap.actor.setMapper(labelMap.imageMapper);
+                    labelMap.imageMapper.setInputConnection(painter.getOutputPort());
+
+                    // set up labelMap color and opacity mapping
+                    labelMap.cfun.addRGBPoint(1, 0, 0, 1); // label "1" will be blue
+                    labelMap.ofun.addPoint(0, 0); // our background value, 0, will be invisible
+                    labelMap.ofun.addPoint(1, 1); // all values above 1 will be fully opaque
+
+                    labelMap.actor.getProperty().setRGBTransferFunction(labelMap.cfun);
+                    labelMap.actor.getProperty().setPiecewiseFunction(labelMap.ofun);
+                    // opacity is applied to entire labelmap
+                    labelMap.actor.getProperty().setOpacity(0.5);
+
+                    image1.data = imageData;
+                    // set input data
+                    image1.imageMapper.setInputData(imageData);
+                    // add actors to renderers
+                    scene.renderer.addViewProp(image1.actor);
+                    scene.renderer.addViewProp(labelMap.actor);
+                    painter.setBackgroundImage(imageData);
+                    // don't set to 0, since that's our empty label color from our pwf
+                    painter.setLabel(1);
+                    const sliceMode = vtk.Rendering.Core.vtkImageMapper.SlicingMode.K;
+                    image1.imageMapper.setSlicingMode(sliceMode);
+                    image1.imageMapper.setSlice(0);
+                    painter.setSlicingMode(sliceMode);
+                    setCamera(sliceMode, scene.renderer, image1.data);
+                    // updateControlPanel(image1.imageMapper, imageData);
+                    const update = () => {
+                        const slicingMode = image1.imageMapper.getSlicingMode() % 3;
+                        if (slicingMode > -1) {
+                            const ijk = [0, 0, 0];
+                            const position = [0, 0, 0];
+                            // position
+                            ijk[slicingMode] = image1.imageMapper.getSlice();
+                            imageData.indexToWorld(ijk, position);
+                            // widgets.paintWidget.getManipulator().setOrigin(position);
+                            painter.setSlicingMode(slicingMode);
+                            scene.paintHandle.updateRepresentationForRender();
+                            // update labelMap layer
+                            labelMap.imageMapper.set(image1.imageMapper.get('slice', 'slicingMode'));
+                            // update UI
+                            document
+                                .querySelector('.slice')
+                                .setAttribute('max', imageData.getDimensions()[slicingMode] - 1);
+                        }
+                    };
+                    image1.imageMapper.onModified(update);
+                    // trigger initial update
+                    update();
+                    window.addEventListener('resize', readyAll);
+                    readyAll();
+
+                    document.querySelector('.axis').addEventListener('input', (ev) => {
+                        const sliceMode = 'IJKXYZ'.indexOf(ev.target.value) % 3;
+                        image1.imageMapper.setSlicingMode(sliceMode);
+                        painter.setSlicingMode(sliceMode);
+
+                        const direction = [0, 0, 0];
+                        direction[sliceMode] = 1;
+                        console.log('sliceMode'+sliceMode);
+                        console.log('direction[]'+direction);
+                        scene.paintHandle.getWidgetState().getHandle().setDirection(direction);
+
+                        setCamera(sliceMode, scene.renderer, image1.data);
+                        scene.renderWindow.render();
+                    });
+                    document.querySelector('.undo').addEventListener('click', () => {
+                        painter.undo();
+                    });
+
+                    document.querySelector('.redo').addEventListener('click', () => {
+                        painter.redo();
+                    });
+                    document.querySelector('.slice').addEventListener('input', (ev) => {
+                        image1.imageMapper.setSlice(Number(ev.target.value));
+                    });
+
+                    function initializeHandle(handle) {
+                        handle.onStartInteractionEvent(() => {
+                            painter.startStroke();
+                        });
+                        handle.onEndInteractionEvent(() => {
+                            painter.endStroke();
+                        });
+                    }
+
+                    scene.paintHandle.onStartInteractionEvent(() => {
+                        painter.startStroke();
+                        painter.addPoint(widgets.paintWidget.getWidgetState().getTrueOrigin());
+                        console.log(widgets.paintWidget.getWidgetState().getTrueOrigin());
+                    });
+
+                    scene.paintHandle.onInteractionEvent(() => {
+                        painter.addPoint(widgets.paintWidget.getWidgetState().getTrueOrigin());
+                    });
+
+                    initializeHandle(scene.paintHandle);
+                });
+
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+</script>
+
+
+
+</body>
+</html>

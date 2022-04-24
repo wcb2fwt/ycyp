@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>itk.js Webpack Example</title>
+    <style>
+        html, body {
+            height: 90%;
+        }
+
+        textarea {
+            resize: none;
+            overflow-y: scroll;
+            position: absolute;
+            box-sizing: border-box;
+            width: 100%;
+            bottom: 0px;
+            left: 0px;
+            top: 50px;
+        }
+    </style>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+    <div>
+        <label>Select DICOM file series or DICOM file:</label>
+        <input name="inputFile" type="file" multiple>
+    </div>
+
+    <!-- File information -->
+    <textarea readonly name="fileInformation">File information...</textarea>
+    <script type="text/javascript" src="https://unpkg.com/itk@14.1.1/umd/itk.js"></script>
+
+    <script src="index.js"></script>
+    <script>
+        var outputTextArea = document.querySelector('textarea')
+        var handleFile = index.outputFileInformation(outputTextArea)
+        var fileInput = document.querySelector('input')
+        fileInput.addEventListener('change', handleFile);
+    </script>
+</body>
+</html>
